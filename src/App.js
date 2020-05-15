@@ -74,16 +74,28 @@ function App() {
         <div className="App">
             <Layout className="layout">
                 <Header>
-                    <div className="logo" />
+                    <img
+                        className="logo"
+                        src="hourglass.png"
+                        alt="hourglass logo"
+                    />
                     <Menu
                         theme="dark"
                         mode="horizontal"
                         defaultSelectedKeys={["1"]}
                     >
-                        <Menu.Item key="1">Home</Menu.Item>
-                        <Menu.Item key="2">Alarms</Menu.Item>
-                        <Menu.Item key="3">Settings</Menu.Item>
-                        <Menu.Item key="4">About</Menu.Item>
+                        <Menu.Item className="unselectable" key="1">
+                            Home
+                        </Menu.Item>
+                        <Menu.Item className="unselectable" key="2">
+                            Alarms
+                        </Menu.Item>
+                        <Menu.Item className="unselectable" key="3">
+                            Settings
+                        </Menu.Item>
+                        <Menu.Item className="unselectable" key="4">
+                            About
+                        </Menu.Item>
                     </Menu>
                 </Header>
                 <Content className={"content"} style={{ padding: "25px" }}>
