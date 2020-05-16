@@ -29,6 +29,7 @@ import "antd/dist/antd.css";
 
 import { MyComp } from "./components/mycomp";
 import { Logo } from "./components/logo";
+import { CountDown } from "./components/CountDown";
 
 function App(props) {
     const { Header, Sider, Content, Footer } = Layout;
@@ -116,7 +117,9 @@ function App(props) {
                                 </Route>
                                 <Route path="/settings">Settings</Route>
                                 <Route path="/about">About</Route>
-                                <Route path="/">Home</Route>
+                                <Route path="/">
+                                    <CountDown />
+                                </Route>
                             </Switch>
                         </div>
                     </Content>
