@@ -85,27 +85,6 @@ const CountDown = (props) => {
 
             <h4>Time is up at 00:00:00 am</h4>
             {buttons}
-
-            {/* TODO: For test only, remove later */}
-            <div className={styles.mediaBox}>
-                test buttons
-                <MediaButton
-                    buttonType={BUTTON_TYPE.RESTART}
-                    onClickHandler={restartHandler}
-                />
-                <MediaButton
-                    buttonType={BUTTON_TYPE.STOP}
-                    onClickHandler={stopHandler}
-                />
-                <MediaButton
-                    buttonType={BUTTON_TYPE.PLAY}
-                    onClickHandler={playHandler}
-                />
-                <MediaButton
-                    buttonType={BUTTON_TYPE.PAUSE}
-                    onClickHandler={pauseHandler}
-                />
-            </div>
         </div>
     );
 };
