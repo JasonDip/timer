@@ -94,9 +94,7 @@ function App(props) {
                             defaultSelectedKeys={["1"]}
                         >
                             <Menu.Item className="unselectable" key="1">
-                                <NavLink exact to="/">
-                                    Home
-                                </NavLink>
+                                <NavLink to="/">Home</NavLink>
                             </Menu.Item>
                             <Menu.Item className="unselectable" key="2">
                                 <NavLink to="/timers">Timers</NavLink>
@@ -118,9 +116,7 @@ function App(props) {
                                 </Route>
                                 <Route path="/settings">Settings</Route>
                                 <Route path="/about">About</Route>
-                                <Route exact path="/">
-                                    Home
-                                </Route>
+                                <Route path="/">Home</Route>
                             </Switch>
                         </div>
                     </Content>
