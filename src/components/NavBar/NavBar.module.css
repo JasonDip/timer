@@ -1,0 +1,9 @@
+.logo {
+    padding-top: 10px;
+    width: auto;
+    height: 80%;
+    object-fit: contain;
+    float: left;
+    margin-right: 50px;
+    display: block;
+}

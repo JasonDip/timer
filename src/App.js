@@ -27,9 +27,8 @@ import {
 } from "antd";
 import "antd/dist/antd.css";
 
-import { MyComp } from "./components/mycomp";
-import { Logo } from "./components/logo";
 import { CountDown } from "./components/CountDown";
+import NavBar from "./components/NavBar/NavBar";
 
 function App(props) {
     const { Header, Sider, Content, Footer } = Layout;
@@ -78,36 +77,8 @@ function App(props) {
         <BrowserRouter>
             <div className="App">
                 <Layout className="layout">
-                    <Header>
-                        {/* <NavLink to="/"> */}
-                        {/* <img
-                            className="logo"
-                            src="hourglass.png"
-                            alt="hourglass logo"
-                            onClick={redirectHome}
-                        /> */}
-                        {/* </NavLink> */}
-                        <Logo />
+                    <NavBar />
 
-                        <Menu
-                            theme="dark"
-                            mode="horizontal"
-                            defaultSelectedKeys={["1"]}
-                        >
-                            <Menu.Item className="unselectable" key="1">
-                                <NavLink to="/">Home</NavLink>
-                            </Menu.Item>
-                            <Menu.Item className="unselectable" key="2">
-                                <NavLink to="/timers">Timers</NavLink>
-                            </Menu.Item>
-                            <Menu.Item className="unselectable" key="3">
-                                <NavLink to="/settings">Settings</NavLink>
-                            </Menu.Item>
-                            <Menu.Item className="unselectable" key="4">
-                                <NavLink to="/about">About</NavLink>
-                            </Menu.Item>
-                        </Menu>
-                    </Header>
                     <Content className={"content"} style={{ padding: "25px" }}>
                         <div className="container">
                             <Switch>
