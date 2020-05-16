@@ -9,13 +9,13 @@ const { Header } = Layout;
 const NavBar = (props) => {
     return (
         <Header className={styles.mainheader}>
-            <NavLink to="/">
+            {/* <NavLink to="/">
                 <img
                     className={styles.logo}
                     src="hourglass.png"
                     alt="hourglass logo"
                 />
-            </NavLink>
+            </NavLink> */}
 
             <Menu
                 theme="dark"
