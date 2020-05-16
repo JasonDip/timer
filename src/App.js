@@ -1,19 +1,20 @@
 import React, { useState } from "react";
-import "./App.css";
 
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import { Layout, List, Avatar } from "antd";
 import "antd/dist/antd.css";
+import "./App.css";
 
 import CountDown, { CLOCK_STATE } from "./components/CountDown/CountDown";
 import NavBar from "./components/NavBar/NavBar";
 
 function App(props) {
+    const [selectedTimer, setSelectedTimer] = useState(null);
     //const [clockState, setClockState] = useState(CLOCK_STATE.STOPPED);
     const [clockState, setClockState] = useState(CLOCK_STATE.PAUSED);
 
-    const { Header, Sider, Content, Footer } = Layout;
+    const { Content } = Layout;
 
     const data = [
         {
@@ -65,8 +66,7 @@ function App(props) {
     const timerList = (
         <div className="item-right">
             <List
-                style={{ overflow: "auto", height: "100%" }}
-                // bordered
+                className="alarmList"
                 itemLayout="horizontal"
                 dataSource={data}
                 renderItem={(item) => (
@@ -106,6 +106,7 @@ function App(props) {
                                         <CountDown
                                             clockState={clockState}
                                             setClockState={setClockState}
+                                            selectedTimer={selectedTimer}
                                         />
                                     </Route>
                                 </Switch>

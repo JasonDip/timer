@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Tooltip } from "antd";
-import { Popconfirm, message } from "antd";
+import { Popconfirm, message, Modal } from "antd";
 import {
     CloseCircleFilled,
     PlayCircleFilled,
@@ -28,14 +28,15 @@ const MediaButton = (props) => {
                 return <LeftCircleFilled onClick={props.onClickHandler} />;
             case BUTTON_TYPE.STOP:
                 return (
-                    <Popconfirm
-                        title="Stop the timer?"
-                        onConfirm={props.onClickHandler}
-                        okText="Yes"
-                        cancelText="No"
-                    >
-                        <CloseCircleFilled />
-                    </Popconfirm>
+                    // <Popconfirm
+                    //     title="Stop the timer?"
+                    //     onConfirm={props.onClickHandler}
+                    //     okText="Yes"
+                    //     cancelText="No"
+                    // >
+                    //     <CloseCircleFilled />
+                    // </Popconfirm>
+                    <CloseCircleFilled onClick={props.onClickHandler} />
                 );
             default:
                 return <QuestionCircleFilled />;

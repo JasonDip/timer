@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
+import { withRouter } from "react-router-dom";
 import styles from "./CountDown.module.css";
 
 import MediaButton, { BUTTON_TYPE } from "./MediaButton/MediaButton";
-import { Button, message } from "antd";
+import { Button, message, Modal } from "antd";
+import { DoubleRightOutlined } from "@ant-design/icons";
 
 export const CLOCK_STATE = {
     RUNNING: "Running",
@@ -11,24 +13,28 @@ export const CLOCK_STATE = {
 };
 
 const CountDown = (props) => {
+    const [showModal, setShowModal] = useState(false);
+
     function stopHandler() {
+        setShowModal(true);
+    }
+
+    function confirmStopHandler() {
         message.config({ top: 150 });
         message.info("Timer Stopped");
         props.setClockState(CLOCK_STATE.STOPPED);
+        setShowModal(false);
     }
 
     function playHandler() {
-        console.log("play pressed");
         props.setClockState(CLOCK_STATE.RUNNING);
     }
 
     function pauseHandler() {
-        console.log("pause pressed");
         props.setClockState(CLOCK_STATE.PAUSED);
     }
 
     function restartHandler() {
-        console.log("restart pressed");
         props.setClockState(CLOCK_STATE.RUNNING);
     }
 
@@ -71,8 +77,15 @@ const CountDown = (props) => {
             );
             break;
         case CLOCK_STATE.STOPPED:
-            // TODO: set handler to go to timer page
-            buttons = <Button type="primary">Select a Timer</Button>;
+            buttons = (
+                <Button
+                    type="primary"
+                    onClick={() => props.history.push("/timers")}
+                    icon={<DoubleRightOutlined />}
+                >
+                    Select a Timer
+                </Button>
+            );
             break;
         default:
             break;
@@ -80,13 +93,26 @@ const CountDown = (props) => {
 
     return (
         <div className={styles.container}>
-            <h1>Title</h1>
-            <h2>00:00:00</h2>
+            {props.selectedTimer ? (
+                <React.Fragment>
+                    {/* TODO: need to output the current timer */}
+                    <h1>Title</h1>
+                    <h2>00:00:00</h2>
 
-            <h3>Time is up at 00:00:00 am</h3>
+                    <h3>Time is up at 00:00:00 am</h3>
+                </React.Fragment>
+            ) : null}
             {buttons}
+            <Modal
+                title="Stop Timer"
+                visible={showModal}
+                onOk={confirmStopHandler}
+                onCancel={() => setShowModal(false)}
+            >
+                Are you sure you want to stop the timer?
+            </Modal>
         </div>
     );
 };
 
-export default CountDown;
+export default withRouter(CountDown);
