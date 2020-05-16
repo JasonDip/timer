@@ -10,7 +10,8 @@ import CountDown, { CLOCK_STATE } from "./components/CountDown/CountDown";
 import NavBar from "./components/NavBar/NavBar";
 
 function App(props) {
-    const [clockState, setClockState] = useState(CLOCK_STATE.STOPPED);
+    //const [clockState, setClockState] = useState(CLOCK_STATE.STOPPED);
+    const [clockState, setClockState] = useState(CLOCK_STATE.PAUSED);
 
     const { Header, Sider, Content, Footer } = Layout;
 
@@ -92,10 +93,7 @@ function App(props) {
                     <NavBar />
 
                     <div className="main">
-                        <Content
-                            className={"content"}
-                            style={{ padding: "25px" }}
-                        >
+                        <Content className={"content"}>
                             <div className="container">
                                 <Switch>
                                     <Route path="/timers">

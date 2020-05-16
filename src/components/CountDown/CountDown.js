@@ -83,7 +83,7 @@ const CountDown = (props) => {
             <h1>Title</h1>
             <h2>00:00:00</h2>
 
-            <h4>Time is up at 00:00:00 am</h4>
+            <h3>Time is up at 00:00:00 am</h3>
             {buttons}
         </div>
     );
