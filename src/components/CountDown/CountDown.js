@@ -104,8 +104,10 @@ const CountDown = (props) => {
             ) : null}
             {buttons}
             <Modal
+                centered
                 title="Stop Timer"
                 visible={showModal}
+                okText="Yes"
                 onOk={confirmStopHandler}
                 onCancel={() => setShowModal(false)}
             >
