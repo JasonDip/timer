@@ -21,6 +21,42 @@ function App(props) {
         {
             title: "Test Title",
         },
+        {
+            title: "Test Title",
+        },
+        {
+            title: "Test Title",
+        },
+        {
+            title: "Test Title",
+        },
+        {
+            title: "Test Title",
+        },
+        {
+            title: "Test Title",
+        },
+        {
+            title: "Test Title",
+        },
+        {
+            title: "Test Title",
+        },
+        {
+            title: "Test Title",
+        },
+        {
+            title: "Test Title",
+        },
+        {
+            title: "Test Title",
+        },
+        {
+            title: "Test Title",
+        },
+        {
+            title: "Test Title",
+        },
     ];
 
     const addTimer = <div className="item-left">Timers</div>;
