@@ -8,7 +8,7 @@ const { Header } = Layout;
 
 const NavBar = (props) => {
     return (
-        <Header>
+        <Header className={styles.mainheader}>
             <NavLink to="/">
                 <img
                     className={styles.logo}
@@ -24,7 +24,7 @@ const NavBar = (props) => {
                 selectedKeys={[props.location.pathname]}
             >
                 <Menu.Item className="unselectable" key="/">
-                    <NavLink to="/">Home</NavLink>
+                    <NavLink to="/">Countdown</NavLink>
                 </Menu.Item>
                 <Menu.Item className="unselectable" key="/timers">
                     <NavLink to="/timers">Timers</NavLink>

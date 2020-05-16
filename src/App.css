@@ -1,9 +1,22 @@
 .App {
     min-width: 500px;
+    height: 100vh;
+    min-height: 600px;
 }
 
 .layout {
-    height: 100vh;
+    /* height: 100vh; */
+    height: 100%;
+}
+
+.main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    /* margin: 24px; */
+    padding: 24px;
 }
 
 .content {
@@ -15,6 +28,7 @@
     -moz-box-shadow: 0px 0px 25px 5px rgba(0, 0, 0, 0.39);
     box-shadow: 0px 0px 25px 5px rgba(0, 0, 0, 0.39);
     background: #ececec;
+    max-width: 1000px;
 }
 
 .unselectable {

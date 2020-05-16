@@ -1,36 +1,17 @@
 import React, { useState } from "react";
 import "./App.css";
 
-import {
-    BrowserRouter,
-    Switch,
-    Route,
-    Link,
-    Redirect,
-    NavLink,
-    useHistory,
-} from "react-router-dom";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 
-import {
-    DatePicker,
-    Typography,
-    Divider,
-    Layout,
-    Space,
-    Card,
-    Menu,
-    Breadcrumb,
-    Row,
-    Col,
-    List,
-    Avatar,
-} from "antd";
+import { Layout, List, Avatar } from "antd";
 import "antd/dist/antd.css";
 
-import { CountDown } from "./components/CountDown";
+import CountDown, { CLOCK_STATE } from "./components/CountDown/CountDown";
 import NavBar from "./components/NavBar/NavBar";
 
 function App(props) {
+    const [clockState, setClockState] = useState(CLOCK_STATE.STOPPED);
+
     const { Header, Sider, Content, Footer } = Layout;
 
     const data = [
@@ -68,32 +49,35 @@ function App(props) {
         </div>
     );
 
-    let history = useHistory();
-    const redirectHome = () => {
-        history.push("/");
-    };
-
     return (
         <BrowserRouter>
             <div className="App">
                 <Layout className="layout">
                     <NavBar />
 
-                    <Content className={"content"} style={{ padding: "25px" }}>
-                        <div className="container">
-                            <Switch>
-                                <Route path="/timers">
-                                    {addTimer}
-                                    {timerList}
-                                </Route>
-                                <Route path="/settings">Settings</Route>
-                                <Route path="/about">About</Route>
-                                <Route path="/">
-                                    <CountDown />
-                                </Route>
-                            </Switch>
-                        </div>
-                    </Content>
+                    <div className="main">
+                        <Content
+                            className={"content"}
+                            style={{ padding: "25px" }}
+                        >
+                            <div className="container">
+                                <Switch>
+                                    <Route path="/timers">
+                                        {addTimer}
+                                        {timerList}
+                                    </Route>
+                                    <Route path="/settings">Settings</Route>
+                                    <Route path="/about">About</Route>
+                                    <Route path="/">
+                                        <CountDown
+                                            clockState={clockState}
+                                            setClockState={setClockState}
+                                        />
+                                    </Route>
+                                </Switch>
+                            </div>
+                        </Content>
+                    </div>
                 </Layout>
             </div>
         </BrowserRouter>
