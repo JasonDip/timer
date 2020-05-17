@@ -16,7 +16,9 @@ import About from "./components/About/About";
 function App(props) {
     const [timerList, setTimerList] = useState(null);
     const [selectedTimer, setSelectedTimer] = useState(null);
+    const [activeTimer, setActiveTimer] = useState(null);
     const [clockState, setClockState] = useState(CLOCK_STATE.STOPPED);
+    const [intervalId, setIntervalId] = useState(null);
 
     const { Content } = Layout;
 
@@ -25,7 +27,7 @@ function App(props) {
     // TODO: if localStorage doesnt have saved timers, then set defaults and save to localStorage
     useEffect(() => {
         if (true) {
-            // TODO
+            // TODO - fix if condition
             setTimerList([
                 {
                     title: "Working",
@@ -38,6 +40,26 @@ function App(props) {
             ]);
         }
     }, []);
+
+    /*  timer countdown logic  */
+    useEffect(() => {
+        if (clockState === CLOCK_STATE.RUNNING && !intervalId) {
+            console.log("setting timer");
+            let interval = setInterval(() => {
+                console.log("trigger interval");
+                setActiveTimer((state) => ({
+                    ...state,
+                    duration: state.duration - 1000,
+                }));
+            }, 1000);
+            setIntervalId(interval);
+        } else {
+            if (intervalId) {
+                clearTimeout(intervalId);
+                setIntervalId(null);
+            }
+        }
+    }, [clockState]);
 
     return (
         <BrowserRouter>
@@ -54,6 +76,10 @@ function App(props) {
                                             setClockState={setClockState}
                                             selectedTimer={selectedTimer}
                                             setSelectedTimer={setSelectedTimer}
+                                            activeTimer={activeTimer}
+                                            setActiveTimer={setActiveTimer}
+                                            intervalId={intervalId}
+                                            setIntervalId={setIntervalId}
                                         />
                                     </Route>
 
@@ -65,6 +91,7 @@ function App(props) {
                                             timerList={timerList}
                                             setTimerList={setTimerList}
                                             setSelectedTimer={setSelectedTimer}
+                                            setActiveTimer={setActiveTimer}
                                             setClockState={setClockState}
                                         />
                                     </Route>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import styles from "./CountDown.module.css";
 
@@ -20,10 +20,10 @@ const CountDown = (props) => {
     }
 
     function confirmStopHandler() {
-        message.config({ top: 150 });
+        message.config({ top: 150, duration: 3 });
         message.info("Timer Stopped");
         props.setClockState(CLOCK_STATE.STOPPED);
-        props.setSelectedTimer(null);
+        props.setActiveTimer(null);
         setShowModal(false);
     }
 
@@ -36,7 +36,8 @@ const CountDown = (props) => {
     }
 
     function restartHandler() {
-        props.setClockState(CLOCK_STATE.RUNNING);
+        props.setActiveTimer(props.selectedTimer);
+        props.setClockState(CLOCK_STATE.PAUSED);
     }
 
     let buttons;
@@ -94,12 +95,12 @@ const CountDown = (props) => {
 
     return (
         <div className={styles.container}>
-            {props.selectedTimer ? (
+            {props.activeTimer ? (
                 <React.Fragment>
-                    {/* TODO: need to output the current timer */}
-                    <h1>{props.selectedTimer.title}</h1>
-                    <h2>{props.selectedTimer.duration}</h2>
+                    <h1>{props.activeTimer.title}</h1>
+                    <h2>{props.activeTimer.duration}</h2>
 
+                    {/* TODO need to set alarm end */}
                     <h3>Time is up at 00:00:00 am</h3>
                 </React.Fragment>
             ) : null}

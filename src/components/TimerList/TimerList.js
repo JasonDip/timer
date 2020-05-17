@@ -20,6 +20,7 @@ const TimerList = (props) => {
             }
         }
         props.setSelectedTimer(JSON.parse(target.getAttribute("rowKey")));
+        props.setActiveTimer(JSON.parse(target.getAttribute("rowKey")));
         props.setClockState(CLOCK_STATE.RUNNING);
         props.history.push("/");
     };
