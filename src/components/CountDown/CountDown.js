@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import styles from "./CountDown.module.css";
+import moment from "moment";
 
 import MediaButton, { BUTTON_TYPE } from "./MediaButton/MediaButton";
 import { Button, message, Modal } from "antd";
@@ -20,7 +21,7 @@ const CountDown = (props) => {
     }
 
     function confirmStopHandler() {
-        message.config({ top: 150, duration: 3 });
+        message.config({ top: 150, duration: 1.5 });
         message.info("Timer Stopped");
         props.setClockState(CLOCK_STATE.STOPPED);
         props.setActiveTimer(null);
@@ -40,6 +41,15 @@ const CountDown = (props) => {
         props.setClockState(CLOCK_STATE.PAUSED);
     }
 
+    function formatMilliseconds() {}
+
+    function getEndTime() {
+        let time = moment();
+
+        return time.format("MMM DD, YYYY - hh:mm:ss A");
+    }
+
+    /*  determine what buttons are displayed based on the clock's state  */
     let buttons;
     switch (props.clockState) {
         case CLOCK_STATE.RUNNING:
@@ -93,6 +103,28 @@ const CountDown = (props) => {
             break;
     }
 
+    /*  timer countdown logic  */
+    const { clockState, intervalId, setActiveTimer, setIntervalId } = props;
+    useEffect(() => {
+        if (clockState === CLOCK_STATE.RUNNING && !intervalId) {
+            console.log("creating interval");
+            let interval = setInterval(() => {
+                console.log("running interval");
+                setActiveTimer((state) => ({
+                    ...state,
+                    duration: state.duration - 1000,
+                }));
+            }, 1000);
+            setIntervalId(interval);
+        } else if (clockState !== CLOCK_STATE.RUNNING && intervalId) {
+            console.log("cancel interval");
+            if (intervalId) {
+                clearTimeout(intervalId);
+                setIntervalId(null);
+            }
+        }
+    }, [clockState, intervalId, setActiveTimer, setIntervalId]);
+
     return (
         <div className={styles.container}>
             {props.activeTimer ? (
@@ -101,7 +133,7 @@ const CountDown = (props) => {
                     <h2>{props.activeTimer.duration}</h2>
 
                     {/* TODO need to set alarm end */}
-                    <h3>Time is up at 00:00:00 am</h3>
+                    <h3>Time is up at {getEndTime()}</h3>
                 </React.Fragment>
             ) : null}
             {buttons}

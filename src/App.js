@@ -41,26 +41,6 @@ function App(props) {
         }
     }, []);
 
-    /*  timer countdown logic  */
-    useEffect(() => {
-        if (clockState === CLOCK_STATE.RUNNING && !intervalId) {
-            console.log("setting timer");
-            let interval = setInterval(() => {
-                console.log("trigger interval");
-                setActiveTimer((state) => ({
-                    ...state,
-                    duration: state.duration - 1000,
-                }));
-            }, 1000);
-            setIntervalId(interval);
-        } else {
-            if (intervalId) {
-                clearTimeout(intervalId);
-                setIntervalId(null);
-            }
-        }
-    }, [clockState]);
-
     return (
         <BrowserRouter>
             <div className="App">
