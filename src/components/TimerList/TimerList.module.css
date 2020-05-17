@@ -3,3 +3,12 @@
     flex-grow: 1;
     /* background-color: purple; */
 }
+
+.timerList {
+    overflow: auto;
+    height: 100%;
+}
+
+.timerItem {
+    cursor: pointer;
+}

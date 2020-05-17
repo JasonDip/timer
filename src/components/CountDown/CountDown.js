@@ -23,6 +23,7 @@ const CountDown = (props) => {
         message.config({ top: 150 });
         message.info("Timer Stopped");
         props.setClockState(CLOCK_STATE.STOPPED);
+        props.setSelectedTimer(null);
         setShowModal(false);
     }
 
@@ -96,8 +97,8 @@ const CountDown = (props) => {
             {props.selectedTimer ? (
                 <React.Fragment>
                     {/* TODO: need to output the current timer */}
-                    <h1>Title</h1>
-                    <h2>00:00:00</h2>
+                    <h1>{props.selectedTimer.title}</h1>
+                    <h2>{props.selectedTimer.duration}</h2>
 
                     <h3>Time is up at 00:00:00 am</h3>
                 </React.Fragment>

@@ -49,8 +49,3 @@ html {
     -ms-user-select: none;
     user-select: none;
 }
-
-.alarmList {
-    overflow: auto;
-    height: 100%;
-}

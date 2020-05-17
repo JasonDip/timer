@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
-import { Layout, List, Avatar } from "antd";
+import { Layout } from "antd";
 import "antd/dist/antd.css";
 import "./App.css";
 
@@ -14,11 +14,30 @@ import Settings from "./components/Settings/Settings";
 import About from "./components/About/About";
 
 function App(props) {
+    const [timerList, setTimerList] = useState(null);
     const [selectedTimer, setSelectedTimer] = useState(null);
-    //const [clockState, setClockState] = useState(CLOCK_STATE.STOPPED);
-    const [clockState, setClockState] = useState(CLOCK_STATE.PAUSED);
+    const [clockState, setClockState] = useState(CLOCK_STATE.STOPPED);
 
     const { Content } = Layout;
+
+    // TODO: if timerList is null, check if localStorage has saved data
+
+    // TODO: if localStorage doesnt have saved timers, then set defaults and save to localStorage
+    useEffect(() => {
+        if (true) {
+            // TODO
+            setTimerList([
+                {
+                    title: "Working",
+                    duration: 1500000,
+                },
+                {
+                    title: "Short Break",
+                    duration: 300000,
+                },
+            ]);
+        }
+    }, []);
 
     return (
         <BrowserRouter>
@@ -34,12 +53,20 @@ function App(props) {
                                             clockState={clockState}
                                             setClockState={setClockState}
                                             selectedTimer={selectedTimer}
+                                            setSelectedTimer={setSelectedTimer}
                                         />
                                     </Route>
 
                                     <Route path="/timers">
-                                        <TimerAdder />
-                                        <TimerList />
+                                        <TimerAdder
+                                            setTimerList={setTimerList}
+                                        />
+                                        <TimerList
+                                            timerList={timerList}
+                                            setTimerList={setTimerList}
+                                            setSelectedTimer={setSelectedTimer}
+                                            setClockState={setClockState}
+                                        />
                                     </Route>
 
                                     <Route path="/settings">
