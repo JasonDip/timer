@@ -38,6 +38,10 @@ function App(props) {
                     title: "Short Break",
                     duration: 300000,
                 },
+                {
+                    title: "test",
+                    duration: 1000,
+                },
             ]);
         }
     }, []);

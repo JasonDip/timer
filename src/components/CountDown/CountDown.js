@@ -12,6 +12,7 @@ export const CLOCK_STATE = {
     RUNNING: "Running",
     PAUSED: "Paused",
     STOPPED: "Stopped",
+    FINISHED: "Finished",
 };
 
 const CountDown = (props) => {
@@ -69,27 +70,6 @@ const CountDown = (props) => {
         return time;
     }
 
-    // function getEndTime() {
-    //     let endTime = moment(props.timerStartTime).add(
-    //         props.activeTimer.duration,
-    //         "ms"
-    //     );
-
-    //     // only show full format if day/month/year changes
-    //     let formatString = ""; // full format is "MMM DD, YYYY - hh:mm:ss A"
-    //     const now = moment().format();
-    //     if (
-    //         moment(now).month() !== moment(endTime).month() ||
-    //         moment(now).day() !== moment(endTime).day() ||
-    //         moment(now).year() !== moment(endTime).year()
-    //     ) {
-    //         formatString += "MMM DD, YYYY - ";
-    //     }
-    //     formatString += "hh:mm:ss A";
-
-    //     return endTime.format(formatString);
-    // }
-
     /*  determine what buttons are displayed based on the clock's state  */
     let buttons;
     switch (props.clockState) {
@@ -129,6 +109,7 @@ const CountDown = (props) => {
                 </div>
             );
             break;
+        case CLOCK_STATE.FINISHED:
         case CLOCK_STATE.STOPPED:
             buttons = (
                 <Button
@@ -166,6 +147,17 @@ const CountDown = (props) => {
         }
     }, [clockState, intervalId, setActiveTimer, setIntervalId]);
 
+    /*  timer finished logic  */
+    const { activeTimer, setClockState } = props;
+    useEffect(() => {
+        if (activeTimer && activeTimer.duration <= 0) {
+            setClockState(CLOCK_STATE.FINISHED);
+            clearTimeout(intervalId);
+            setIntervalId(null);
+            setActiveTimer(null);
+        }
+    }, [activeTimer, setClockState, intervalId, setIntervalId, setActiveTimer]);
+
     return (
         <div className={styles.container}>
             {props.activeTimer ? (
@@ -176,6 +168,11 @@ const CountDown = (props) => {
                         <h3>Ends at {props.timerEndTime}</h3>
                     ) : null}
                 </React.Fragment>
+            ) : null}
+            {props.clockState === CLOCK_STATE.FINISHED ? (
+                <p>
+                    {props.selectedTimer.title} ended at {props.timerEndTime}
+                </p>
             ) : null}
             {buttons}
             <Modal
