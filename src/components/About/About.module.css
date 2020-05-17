@@ -1,0 +1,16 @@
+.aboutContainer {
+    margin: 50px;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+}
+
+.contactGroup {
+    margin-left: auto;
+}
+
+.contactIcon {
+    font-size: 50px;
+    padding: 0 5px;
+    color: #1890ff;
+}
