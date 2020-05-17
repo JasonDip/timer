@@ -14,10 +14,11 @@ export const CLOCK_STATE = {
 };
 
 const CountDown = (props) => {
-    const [showModal, setShowModal] = useState(false);
+    const [showStopModal, setShowStopModal] = useState(false);
+    const [showResetModal, setShowResetModal] = useState(false);
 
     function stopHandler() {
-        setShowModal(true);
+        setShowStopModal(true);
     }
 
     function confirmStopHandler() {
@@ -25,28 +26,67 @@ const CountDown = (props) => {
         message.info("Timer Stopped");
         props.setClockState(CLOCK_STATE.STOPPED);
         props.setActiveTimer(null);
-        setShowModal(false);
+        setShowStopModal(false);
     }
 
     function playHandler() {
         props.setClockState(CLOCK_STATE.RUNNING);
+        props.setTimerStartTime(moment().format());
     }
 
     function pauseHandler() {
         props.setClockState(CLOCK_STATE.PAUSED);
     }
 
-    function restartHandler() {
-        props.setActiveTimer(props.selectedTimer);
-        props.setClockState(CLOCK_STATE.PAUSED);
+    function resetHandler() {
+        setShowResetModal(true);
     }
 
-    function formatMilliseconds() {}
+    function confirmResetHandler() {
+        props.setActiveTimer(props.selectedTimer);
+        props.setClockState(CLOCK_STATE.PAUSED);
+        message.config({ top: 150, duration: 1.5 });
+        message.info("Timer Reset");
+        setShowResetModal(false);
+    }
+
+    function formatMilliseconds(milliseconds) {
+        let hours = Math.floor(milliseconds / (1000 * 60 * 60));
+        let minutes = Math.floor(milliseconds / (1000 * 60)) - hours * 60;
+        let seconds = milliseconds / 1000 - hours * 60 * 60 - minutes * 60;
+
+        let time = "";
+        if (hours > 0) {
+            time = time.concat(hours.toString().padStart(2, "0"), ":");
+        }
+        time = time.concat(
+            minutes.toString().padStart(2, "0"),
+            ":",
+            seconds.toString().padStart(2, "0")
+        );
+
+        return time;
+    }
 
     function getEndTime() {
-        let time = moment();
+        let endTime = moment(props.timerStartTime).add(
+            props.selectedTimer.duration,
+            "ms"
+        );
 
-        return time.format("MMM DD, YYYY - hh:mm:ss A");
+        // only show full format if day/month/year changes
+        let formatString = ""; // full format is "MMM DD, YYYY - hh:mm:ss A"
+        const now = moment().format();
+        if (
+            moment(now).month() !== moment(endTime).month() ||
+            moment(now).day() !== moment(endTime).day() ||
+            moment(now).year() !== moment(endTime).year()
+        ) {
+            formatString += "MMM DD, YYYY - ";
+        }
+        formatString += "hh:mm:ss A";
+
+        return endTime.format(formatString);
     }
 
     /*  determine what buttons are displayed based on the clock's state  */
@@ -56,8 +96,8 @@ const CountDown = (props) => {
             buttons = (
                 <div className={styles.mediaBox}>
                     <MediaButton
-                        buttonType={BUTTON_TYPE.RESTART}
-                        onClickHandler={restartHandler}
+                        buttonType={BUTTON_TYPE.RESET}
+                        onClickHandler={resetHandler}
                     />
                     <MediaButton
                         buttonType={BUTTON_TYPE.PAUSE}
@@ -74,8 +114,8 @@ const CountDown = (props) => {
             buttons = (
                 <div className={styles.mediaBox}>
                     <MediaButton
-                        buttonType={BUTTON_TYPE.RESTART}
-                        onClickHandler={restartHandler}
+                        buttonType={BUTTON_TYPE.RESET}
+                        onClickHandler={resetHandler}
                     />
                     <MediaButton
                         buttonType={BUTTON_TYPE.PLAY}
@@ -130,22 +170,32 @@ const CountDown = (props) => {
             {props.activeTimer ? (
                 <React.Fragment>
                     <h1>{props.activeTimer.title}</h1>
-                    <h2>{props.activeTimer.duration}</h2>
-
-                    {/* TODO need to set alarm end */}
-                    <h3>Time is up at {getEndTime()}</h3>
+                    <h2>{formatMilliseconds(props.activeTimer.duration)}</h2>
+                    {props.clockState === CLOCK_STATE.RUNNING ? (
+                        <h3>Time is up at {getEndTime()}</h3>
+                    ) : null}
                 </React.Fragment>
             ) : null}
             {buttons}
             <Modal
                 centered
                 title="Stop Timer"
-                visible={showModal}
+                visible={showStopModal}
                 okText="Yes"
                 onOk={confirmStopHandler}
-                onCancel={() => setShowModal(false)}
+                onCancel={() => setShowStopModal(false)}
             >
                 Are you sure you want to stop the timer?
+            </Modal>
+            <Modal
+                centered
+                title="Reset Timer"
+                visible={showResetModal}
+                okText="Yes"
+                onOk={confirmResetHandler}
+                onCancel={() => setShowResetModal(false)}
+            >
+                Are you sure you want to reset the timer?
             </Modal>
         </div>
     );

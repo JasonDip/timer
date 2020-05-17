@@ -13,7 +13,7 @@ export const BUTTON_TYPE = {
     PAUSE: "Pause",
     PLAY: "Play",
     STOP: "Stop",
-    RESTART: "Restart",
+    RESET: "Reset",
 };
 
 const MediaButton = (props) => {
@@ -23,7 +23,7 @@ const MediaButton = (props) => {
                 return <PlayCircleFilled onClick={props.onClickHandler} />;
             case BUTTON_TYPE.PAUSE:
                 return <PauseCircleFilled onClick={props.onClickHandler} />;
-            case BUTTON_TYPE.RESTART:
+            case BUTTON_TYPE.RESET:
                 return <LeftCircleFilled onClick={props.onClickHandler} />;
             case BUTTON_TYPE.STOP:
                 return <CloseCircleFilled onClick={props.onClickHandler} />;

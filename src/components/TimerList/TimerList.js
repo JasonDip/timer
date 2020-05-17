@@ -1,4 +1,6 @@
 import React from "react";
+import moment from "moment";
+
 import { withRouter } from "react-router-dom";
 import { List, Avatar } from "antd";
 import { CLOCK_STATE } from "../CountDown/CountDown";
@@ -7,8 +9,8 @@ import styles from "./TimerList.module.css";
 
 const TimerList = (props) => {
     const placeholderData = [];
-
     const timerClickHandler = (e) => {
+        // bubble up to the menu-item-div that is holding the timer object
         let target = e.target;
         let tryCount = 5;
         while (!target.hasAttribute("rowKey")) {
@@ -19,8 +21,15 @@ const TimerList = (props) => {
                 return;
             }
         }
+        // clear previous interval if currently running
+        if (props.intervalId) {
+            clearInterval(props.intervalId);
+            props.setIntervalId(null);
+        }
+        // set state to run timer
         props.setSelectedTimer(JSON.parse(target.getAttribute("rowKey")));
         props.setActiveTimer(JSON.parse(target.getAttribute("rowKey")));
+        props.setTimerStartTime(moment().format());
         props.setClockState(CLOCK_STATE.RUNNING);
         props.history.push("/");
     };
