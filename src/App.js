@@ -17,7 +17,7 @@ function App(props) {
     const [timerList, setTimerList] = useState(null);
     const [selectedTimer, setSelectedTimer] = useState(null);
     const [activeTimer, setActiveTimer] = useState(null);
-    const [timerStartTime, setTimerStartTime] = useState(null);
+    const [timerEndTime, setTimerEndTime] = useState(null);
     const [clockState, setClockState] = useState(CLOCK_STATE.STOPPED);
     const [intervalId, setIntervalId] = useState(null);
 
@@ -61,10 +61,8 @@ function App(props) {
                                             setActiveTimer={setActiveTimer}
                                             intervalId={intervalId}
                                             setIntervalId={setIntervalId}
-                                            timerStartTime={timerStartTime}
-                                            setTimerStartTime={
-                                                setTimerStartTime
-                                            }
+                                            timerEndTime={timerEndTime}
+                                            setTimerEndTime={setTimerEndTime}
                                         />
                                     </Route>
 
@@ -78,9 +76,7 @@ function App(props) {
                                             setSelectedTimer={setSelectedTimer}
                                             setActiveTimer={setActiveTimer}
                                             setClockState={setClockState}
-                                            setTimerStartTime={
-                                                setTimerStartTime
-                                            }
+                                            setTimerEndTime={setTimerEndTime}
                                             intervalId={intervalId}
                                             setIntervalId={setIntervalId}
                                         />

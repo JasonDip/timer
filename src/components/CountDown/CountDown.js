@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import styles from "./CountDown.module.css";
 import moment from "moment";
+import { getEndTime } from "../util";
 
 import MediaButton, { BUTTON_TYPE } from "./MediaButton/MediaButton";
 import { Button, message, Modal } from "antd";
@@ -31,7 +32,7 @@ const CountDown = (props) => {
 
     function playHandler() {
         props.setClockState(CLOCK_STATE.RUNNING);
-        props.setTimerStartTime(moment().format());
+        props.setTimerEndTime(getEndTime(moment(), props.activeTimer.duration));
     }
 
     function pauseHandler() {
@@ -68,26 +69,26 @@ const CountDown = (props) => {
         return time;
     }
 
-    function getEndTime() {
-        let endTime = moment(props.timerStartTime).add(
-            props.selectedTimer.duration,
-            "ms"
-        );
+    // function getEndTime() {
+    //     let endTime = moment(props.timerStartTime).add(
+    //         props.activeTimer.duration,
+    //         "ms"
+    //     );
 
-        // only show full format if day/month/year changes
-        let formatString = ""; // full format is "MMM DD, YYYY - hh:mm:ss A"
-        const now = moment().format();
-        if (
-            moment(now).month() !== moment(endTime).month() ||
-            moment(now).day() !== moment(endTime).day() ||
-            moment(now).year() !== moment(endTime).year()
-        ) {
-            formatString += "MMM DD, YYYY - ";
-        }
-        formatString += "hh:mm:ss A";
+    //     // only show full format if day/month/year changes
+    //     let formatString = ""; // full format is "MMM DD, YYYY - hh:mm:ss A"
+    //     const now = moment().format();
+    //     if (
+    //         moment(now).month() !== moment(endTime).month() ||
+    //         moment(now).day() !== moment(endTime).day() ||
+    //         moment(now).year() !== moment(endTime).year()
+    //     ) {
+    //         formatString += "MMM DD, YYYY - ";
+    //     }
+    //     formatString += "hh:mm:ss A";
 
-        return endTime.format(formatString);
-    }
+    //     return endTime.format(formatString);
+    // }
 
     /*  determine what buttons are displayed based on the clock's state  */
     let buttons;
@@ -172,7 +173,7 @@ const CountDown = (props) => {
                     <h1>{props.activeTimer.title}</h1>
                     <h2>{formatMilliseconds(props.activeTimer.duration)}</h2>
                     {props.clockState === CLOCK_STATE.RUNNING ? (
-                        <h3>Time is up at {getEndTime()}</h3>
+                        <h3>Ends at {props.timerEndTime}</h3>
                     ) : null}
                 </React.Fragment>
             ) : null}

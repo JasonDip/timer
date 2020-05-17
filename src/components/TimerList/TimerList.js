@@ -1,5 +1,6 @@
 import React from "react";
 import moment from "moment";
+import { getEndTime } from "../util";
 
 import { withRouter } from "react-router-dom";
 import { List, Avatar } from "antd";
@@ -21,15 +22,16 @@ const TimerList = (props) => {
                 return;
             }
         }
+        let timer = JSON.parse(target.getAttribute("rowKey"));
         // clear previous interval if currently running
         if (props.intervalId) {
             clearInterval(props.intervalId);
             props.setIntervalId(null);
         }
         // set state to run timer
-        props.setSelectedTimer(JSON.parse(target.getAttribute("rowKey")));
-        props.setActiveTimer(JSON.parse(target.getAttribute("rowKey")));
-        props.setTimerStartTime(moment().format());
+        props.setSelectedTimer(timer);
+        props.setActiveTimer(timer);
+        props.setTimerEndTime(getEndTime(moment(), timer.duration));
         props.setClockState(CLOCK_STATE.RUNNING);
         props.history.push("/");
     };
