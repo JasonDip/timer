@@ -5,8 +5,8 @@ import moment from "moment";
 import { getEndTime } from "../util";
 
 import MediaButton, { BUTTON_TYPE } from "./MediaButton/MediaButton";
-import { Button, message, Modal } from "antd";
-import { DoubleRightOutlined } from "@ant-design/icons";
+import { Button, message, Modal, Result } from "antd";
+import { DoubleRightOutlined, LikeOutlined } from "@ant-design/icons";
 
 export const CLOCK_STATE = {
     RUNNING: "Running",
@@ -171,7 +171,10 @@ const CountDown = (props) => {
             ) : null}
             {props.clockState === CLOCK_STATE.FINISHED ? (
                 <p>
-                    {props.selectedTimer.title} ended at {props.timerEndTime}
+                    <Result
+                        icon={<LikeOutlined />}
+                        title={`${props.selectedTimer.title} ended at ${props.timerEndTime}!`}
+                    />
                 </p>
             ) : null}
             {buttons}
