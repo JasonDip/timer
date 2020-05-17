@@ -1,0 +1,8 @@
+.containerLeft {
+    height: auto;
+    flex-grow: 3;
+    border-width: 0 1px 0 0;
+    border-style: solid;
+    margin-right: 10px;
+    /* background-color: aqua; */
+}
