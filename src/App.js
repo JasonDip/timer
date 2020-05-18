@@ -73,8 +73,6 @@ function App(props) {
 
     // TODO: add useeffect for saving timerlist to localstorage when changed
 
-    // TODO: add useEffect for optional setting title to timer
-
     /*  stop alarm sound after the amount specified in options  */
     useEffect(() => {
         if (alarmRingCount <= 0) {
