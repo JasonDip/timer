@@ -3,7 +3,7 @@ import moment from "moment";
 import { getEndTime, formatMilliseconds } from "../../util";
 
 import { withRouter } from "react-router-dom";
-import { List, Avatar, Modal } from "antd";
+import { List, Avatar, Modal, Button } from "antd";
 import { CLOCK_STATE } from "../../CountDown/CountDown";
 
 import styles from "./TimerList.module.css";
@@ -75,7 +75,9 @@ const TimerList = (props) => {
                         className={styles.timerItem}
                         rowKey={JSON.stringify(item)}
                         actions={[
-                            <button onClick={timerDeleteHandler}>DEL</button>,
+                            <Button danger onClick={timerDeleteHandler}>
+                                X
+                            </Button>,
                         ]}
                     >
                         <List.Item.Meta
