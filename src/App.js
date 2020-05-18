@@ -37,41 +37,57 @@ function App(props) {
 
     const { Content } = Layout;
 
-    // TODO: if generalSettings is null, check if localStorage has saved data
-    if (!generalSettings) {
-    }
-
-    // TODO: if no saved generalSettings, set defaultGeneralSettings and save to localStorage
+    /*  get saved data from localStorage  */
     useEffect(() => {
-        if (true) {
+        // get generalSettings from localStorage or default
+        let genSet = localStorage.getItem("generalSettings");
+        if (genSet) {
+            setGeneralSettings(JSON.parse(genSet));
+        } else {
             setGeneralSettings(defaultGeneralSettings);
+            localStorage.setItem(
+                "generalSettings",
+                JSON.stringify(defaultGeneralSettings)
+            );
         }
-    }, []);
-
-    // TODO: if soundSettings is null, check if localStorage has saved data
-    if (!soundSettings) {
-    }
-
-    // TODO: if no saved sound settings, set default sound settings and save to localStorage
-    useEffect(() => {
-        if (true) {
+        // get soundSettings from localStorage or default
+        let soundSet = localStorage.getItem("soundSettings");
+        if (soundSet) {
+            setSoundSettings(JSON.parse(soundSet));
+        } else {
             setSoundSettings(defaultSoundSettings);
+            localStorage.setItem(
+                "soundSettings",
+                JSON.stringify(defaultSoundSettings)
+            );
         }
-    }, []);
-
-    // TODO: if timerList is null, check if localStorage has saved data
-    if (!timerList) {
-    }
-
-    // TODO: if localStorage doesnt have saved timers, then set defaults and save to localStorage
-    useEffect(() => {
-        if (true) {
-            // TODO - fix if condition
+        // get timerList from localStorage or default
+        let timersLocal = localStorage.getItem("timerList");
+        if (timersLocal) {
+            setTimerList(JSON.parse(timersLocal));
+        } else {
             setTimerList(defaultTimerList);
+            localStorage.setItem("timerList", JSON.stringify(defaultTimerList));
         }
     }, []);
 
-    // TODO: add useeffect for saving timerlist to localstorage when changed
+    /*  save changes to generalSettings  */
+    useEffect(() => {
+        localStorage.setItem(
+            "generalSettings",
+            JSON.stringify(generalSettings)
+        );
+    }, [generalSettings]);
+
+    /*  save changes to soundSettings  */
+    useEffect(() => {
+        localStorage.setItem("soundSettings", JSON.stringify(soundSettings));
+    }, [soundSettings]);
+
+    /*  save changes to timerList  */
+    useEffect(() => {
+        localStorage.setItem("timerList", JSON.stringify(timerList));
+    }, [timerList]);
 
     /*  stop alarm sound after the amount specified in options  */
     useEffect(() => {
