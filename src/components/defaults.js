@@ -13,6 +13,11 @@ export const defaultTimerList = [
         uuid: uuid(),
     },
     {
+        title: "Long Break",
+        duration: 1200000,
+        uuid: uuid(),
+    },
+    {
         title: "test",
         duration: 1000,
         uuid: uuid(),

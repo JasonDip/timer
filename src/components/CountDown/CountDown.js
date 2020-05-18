@@ -14,9 +14,6 @@ import { CLOCK_STATE, SHOW_IN_TITLE } from "../constants";
 const CountDown = (props) => {
     const [showStopModal, setShowStopModal] = useState(false);
     const [showResetModal, setShowResetModal] = useState(false);
-    const [playAlarm, setPlayAlarm] = useState(false);
-    const [alarmIntervalId, setAlarmIntervalId] = useState(null); // intervalId for the alarm sound repeating
-    const [alarmRingCount, setAlarmRingCount] = useState(null);
 
     function stopHandler() {
         setShowStopModal(true);
@@ -158,7 +155,14 @@ const CountDown = (props) => {
 
     /*  timer finished logic  */
     const { activeTimer, setClockState } = props;
-    const { soundSettings } = props;
+    const {
+        soundSettings,
+        setAlarmRingCount,
+        setPlayAlarm,
+        playAlarm,
+        setAlarmIntervalId,
+        alarmIntervalId,
+    } = props;
     useEffect(() => {
         if (activeTimer && activeTimer.duration <= 0) {
             setClockState(CLOCK_STATE.FINISHED);
@@ -174,8 +178,9 @@ const CountDown = (props) => {
         intervalId,
         setIntervalId,
         setActiveTimer,
-        history,
         soundSettings,
+        setAlarmRingCount,
+        setPlayAlarm,
     ]);
 
     /*  play sound  */
@@ -191,8 +196,8 @@ const CountDown = (props) => {
             // change global volume
             Howler.volume(soundSettings.volume);
             // play the sound
-            const intervalId = setInterval(() => {
-                if (alarmRingCount > 0) {
+            let intervalId = setInterval(() => {
+                if (playAlarm) {
                     sound.play();
                     setAlarmRingCount((count) => {
                         return count - 1;
@@ -200,20 +205,14 @@ const CountDown = (props) => {
                 }
             }, 1000);
             setAlarmIntervalId(intervalId);
-        } else if (!playAlarm && alarmIntervalId) {
-            clearInterval(alarmIntervalId);
-            setAlarmIntervalId(null);
         }
-    }, [playAlarm, alarmIntervalId, soundSettings, alarmRingCount]);
-
-    /*  play alarm rang for the amount specified in options  */
-    useEffect(() => {
-        if (alarmRingCount <= 0) {
-            clearInterval(alarmIntervalId);
-            setAlarmIntervalId(null);
-            setPlayAlarm(false);
-        }
-    }, [alarmRingCount, alarmIntervalId]);
+    }, [
+        playAlarm,
+        alarmIntervalId,
+        soundSettings,
+        setAlarmIntervalId,
+        setAlarmRingCount,
+    ]);
 
     return (
         <div className={styles.container}>

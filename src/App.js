@@ -18,12 +18,20 @@ import {
 import { CLOCK_STATE } from "./components/constants";
 
 function App(props) {
+    /*  state for countdown timer  */
     const [timerList, setTimerList] = useState(null);
     const [selectedTimer, setSelectedTimer] = useState(null);
     const [activeTimer, setActiveTimer] = useState(null);
     const [timerEndTime, setTimerEndTime] = useState(null);
     const [clockState, setClockState] = useState(CLOCK_STATE.STOPPED);
     const [intervalId, setIntervalId] = useState(null); // intervalId for the countdown
+
+    /*  state for playing alarm sound  */
+    const [playAlarm, setPlayAlarm] = useState(false);
+    const [alarmIntervalId, setAlarmIntervalId] = useState(null); // intervalId for the alarm sound repeating
+    const [alarmRingCount, setAlarmRingCount] = useState(null);
+
+    /*  state for settings  */
     const [generalSettings, setGeneralSettings] = useState(null);
     const [soundSettings, setSoundSettings] = useState(null);
 
@@ -67,6 +75,15 @@ function App(props) {
 
     // TODO: add useEffect for optional setting title to timer
 
+    /*  stop alarm sound after the amount specified in options  */
+    useEffect(() => {
+        if (alarmRingCount <= 0) {
+            clearInterval(alarmIntervalId);
+            setAlarmIntervalId(null);
+            setPlayAlarm(false);
+        }
+    }, [alarmRingCount, alarmIntervalId]);
+
     return (
         <BrowserRouter>
             <div className="App">
@@ -90,6 +107,16 @@ function App(props) {
                                             setTimerEndTime={setTimerEndTime}
                                             generalSettings={generalSettings}
                                             soundSettings={soundSettings}
+                                            playAlarm={playAlarm}
+                                            setPlayAlarm={setPlayAlarm}
+                                            alarmIntervalId={alarmIntervalId}
+                                            setAlarmIntervalId={
+                                                setAlarmIntervalId
+                                            }
+                                            alarmRingCount={alarmRingCount}
+                                            setAlarmRingCount={
+                                                setAlarmRingCount
+                                            }
                                         />
                                     </Route>
 
@@ -114,6 +141,7 @@ function App(props) {
                                             }
                                             soundSettings={soundSettings}
                                             setSoundSettings={setSoundSettings}
+                                            setTimerList={setTimerList}
                                         />
                                     </Route>
 

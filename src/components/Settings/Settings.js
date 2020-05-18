@@ -1,9 +1,16 @@
 import React from "react";
+import { withRouter } from "react-router-dom";
 import styles from "./Settings.module.css";
 import { SOUNDS, SHOW_IN_TITLE } from "../constants";
-import { defaultGeneralSettings, defaultSoundSettings } from "../defaults";
+import {
+    defaultGeneralSettings,
+    defaultSoundSettings,
+    defaultTimerList,
+} from "../defaults";
+import { SoundOutlined } from "@ant-design/icons";
+import { Howl, Howler } from "howler";
 
-import { Divider, Select, InputNumber, Switch, Slider } from "antd";
+import { Divider, Select, InputNumber, Switch, Slider, Button } from "antd";
 const { Option } = Select;
 
 const Settings = (props) => {
@@ -42,6 +49,24 @@ const Settings = (props) => {
         }));
     };
 
+    const testSoundClickHandler = () => {
+        // setup the new Howl
+        const sound = new Howl({
+            src: [`/alarmsounds/${props.soundSettings.soundClip}.mp3`],
+        });
+        // change global volume
+        Howler.volume(props.soundSettings.volume);
+        // play the sound
+        sound.play();
+    };
+
+    const resetToDefaultClickHandler = () => {
+        props.setSoundSettings({ ...defaultSoundSettings });
+        props.setGeneralSettings({ ...defaultGeneralSettings });
+        props.setTimerList(JSON.parse(JSON.stringify(defaultTimerList)));
+        props.history.push("/");
+    };
+
     const soundEnableVal = () => {
         if (!props.soundSettings) {
             return defaultSoundSettings.soundEnabled;
@@ -52,13 +77,6 @@ const Settings = (props) => {
             return props.soundSettings.soundEnabled;
         }
     };
-
-    // const showInTitleVal = () => {
-    //     if (!props.generalSettings) {
-    //         return defaultGeneralSettings.showInTitle
-    //     }
-    //     if (props.generalSettings)
-    // }
 
     return (
         <div className={styles.settingsContainer}>
@@ -79,7 +97,14 @@ const Settings = (props) => {
             <br />
 
             <Divider />
-            <h3>Sound Settings</h3>
+            <div style={{ display: "flex" }}>
+                <h3 style={{ marginRight: "10px" }}>Sound Settings</h3>
+                <Button
+                    shape="circle"
+                    icon={<SoundOutlined />}
+                    onClick={testSoundClickHandler}
+                ></Button>
+            </div>
 
             <label>Sound Enabled</label>
             <Switch
@@ -135,8 +160,14 @@ const Settings = (props) => {
                 }
                 onChange={ringCountChangeHandler}
             />
+            <br />
+
+            <Divider />
+            <Button type="danger" onClick={resetToDefaultClickHandler}>
+                Reset To Default Settings
+            </Button>
         </div>
     );
 };
 
-export default Settings;
+export default withRouter(Settings);
