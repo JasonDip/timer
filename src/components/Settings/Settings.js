@@ -64,6 +64,7 @@ const Settings = (props) => {
         props.setSoundSettings({ ...defaultSoundSettings });
         props.setGeneralSettings({ ...defaultGeneralSettings });
         props.setTimerList(JSON.parse(JSON.stringify(defaultTimerList)));
+        document.title = "Timer";
         props.history.push("/");
     };
 
