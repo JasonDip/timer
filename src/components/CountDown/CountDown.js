@@ -2,22 +2,21 @@ import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import styles from "./CountDown.module.css";
 import moment from "moment";
+import { Howl, Howler } from "howler";
 import { getEndTime, formatMilliseconds } from "../util";
 
 import MediaButton, { BUTTON_TYPE } from "./MediaButton/MediaButton";
 import { Button, message, Modal, Result } from "antd";
 import { DoubleRightOutlined, LikeOutlined } from "@ant-design/icons";
 
-export const CLOCK_STATE = {
-    RUNNING: "Running",
-    PAUSED: "Paused",
-    STOPPED: "Stopped",
-    FINISHED: "Finished",
-};
+import { CLOCK_STATE, SHOW_IN_TITLE } from "../constants";
 
 const CountDown = (props) => {
     const [showStopModal, setShowStopModal] = useState(false);
     const [showResetModal, setShowResetModal] = useState(false);
+    const [playAlarm, setPlayAlarm] = useState(false);
+    const [alarmIntervalId, setAlarmIntervalId] = useState(null); // intervalId for the alarm sound repeating
+    const [alarmRingCount, setAlarmRingCount] = useState(null);
 
     function stopHandler() {
         setShowStopModal(true);
@@ -29,6 +28,7 @@ const CountDown = (props) => {
         props.setClockState(CLOCK_STATE.STOPPED);
         props.setActiveTimer(null);
         setShowStopModal(false);
+        document.title = "Timer";
     }
 
     function playHandler() {
@@ -108,16 +108,39 @@ const CountDown = (props) => {
     }
 
     /*  timer countdown logic  */
-    const { clockState, intervalId, setActiveTimer, setIntervalId } = props;
+    const {
+        clockState,
+        intervalId,
+        setActiveTimer,
+        setIntervalId,
+        history,
+        generalSettings,
+    } = props;
     useEffect(() => {
         if (clockState === CLOCK_STATE.RUNNING && !intervalId) {
             console.log("creating interval");
             let interval = setInterval(() => {
                 console.log("running interval");
-                setActiveTimer((state) => ({
-                    ...state,
-                    duration: state.duration - 1000,
-                }));
+                setActiveTimer((state) => {
+                    // switch back to main page if time is up
+                    if (state.duration <= 0) {
+                        history.push("/");
+                    }
+
+                    // show countdown in title based on settings
+                    if (
+                        generalSettings.showInTitle === SHOW_IN_TITLE.COUNTDOWN
+                    ) {
+                        document.title = formatMilliseconds(
+                            state.duration - 1000
+                        );
+                    }
+
+                    return {
+                        ...state,
+                        duration: state.duration - 1000,
+                    };
+                });
             }, 1000);
             setIntervalId(interval);
         } else if (clockState !== CLOCK_STATE.RUNNING && intervalId) {
@@ -127,18 +150,75 @@ const CountDown = (props) => {
                 setIntervalId(null);
             }
         }
-    }, [clockState, intervalId, setActiveTimer, setIntervalId]);
+    }, [
+        clockState,
+        intervalId,
+        setActiveTimer,
+        setIntervalId,
+        history,
+        generalSettings,
+    ]);
 
     /*  timer finished logic  */
     const { activeTimer, setClockState } = props;
+    const { soundSettings } = props;
     useEffect(() => {
         if (activeTimer && activeTimer.duration <= 0) {
             setClockState(CLOCK_STATE.FINISHED);
             clearTimeout(intervalId);
             setIntervalId(null);
             setActiveTimer(null);
+            setPlayAlarm(true);
+            setAlarmRingCount(soundSettings.ringCount);
         }
-    }, [activeTimer, setClockState, intervalId, setIntervalId, setActiveTimer]);
+    }, [
+        activeTimer,
+        setClockState,
+        intervalId,
+        setIntervalId,
+        setActiveTimer,
+        history,
+        soundSettings,
+    ]);
+
+    /*  play sound  */
+    useEffect(() => {
+        if (!soundSettings) return;
+        if (!soundSettings.soundEnabled) return;
+
+        if (playAlarm && !alarmIntervalId) {
+            console.log("inside setup interval for sound");
+            // setup the new Howl
+            const sound = new Howl({
+                src: [`/alarmsounds/${soundSettings.soundClip}.mp3`],
+            });
+            // change global volume
+            Howler.volume(soundSettings.volume);
+            // play the sound
+            const intervalId = setInterval(() => {
+                if (alarmRingCount > 0) {
+                    sound.play();
+                    setAlarmRingCount((count) => {
+                        return count - 1;
+                    });
+                }
+            }, 1000);
+            setAlarmIntervalId(intervalId);
+        } else if (!playAlarm && alarmIntervalId) {
+            clearInterval(alarmIntervalId);
+            setAlarmIntervalId(null);
+        }
+    }, [playAlarm, alarmIntervalId, soundSettings, alarmRingCount]);
+
+    /*  play alarm rang for the amount specified in options  */
+    useEffect(() => {
+        if (alarmRingCount <= 0) {
+            console.log("in cancel");
+            clearInterval(alarmIntervalId);
+            setAlarmIntervalId(null);
+            setPlayAlarm(false);
+        }
+    }, [alarmRingCount, alarmIntervalId]);
 
     return (
         <div className={styles.container}>
