@@ -91,33 +91,6 @@ function App(props) {
                         <Content className={"content"}>
                             <div className="container">
                                 <Switch>
-                                    <Route exact path="/">
-                                        <CountDown
-                                            clockState={clockState}
-                                            setClockState={setClockState}
-                                            selectedTimer={selectedTimer}
-                                            setSelectedTimer={setSelectedTimer}
-                                            activeTimer={activeTimer}
-                                            setActiveTimer={setActiveTimer}
-                                            intervalId={intervalId}
-                                            setIntervalId={setIntervalId}
-                                            timerEndTime={timerEndTime}
-                                            setTimerEndTime={setTimerEndTime}
-                                            generalSettings={generalSettings}
-                                            soundSettings={soundSettings}
-                                            playAlarm={playAlarm}
-                                            setPlayAlarm={setPlayAlarm}
-                                            alarmIntervalId={alarmIntervalId}
-                                            setAlarmIntervalId={
-                                                setAlarmIntervalId
-                                            }
-                                            alarmRingCount={alarmRingCount}
-                                            setAlarmRingCount={
-                                                setAlarmRingCount
-                                            }
-                                        />
-                                    </Route>
-
                                     <Route path="/timers">
                                         <Timers
                                             timerList={timerList}
@@ -145,6 +118,33 @@ function App(props) {
 
                                     <Route path="/about">
                                         <About />
+                                    </Route>
+
+                                    <Route path="/">
+                                        <CountDown
+                                            clockState={clockState}
+                                            setClockState={setClockState}
+                                            selectedTimer={selectedTimer}
+                                            setSelectedTimer={setSelectedTimer}
+                                            activeTimer={activeTimer}
+                                            setActiveTimer={setActiveTimer}
+                                            intervalId={intervalId}
+                                            setIntervalId={setIntervalId}
+                                            timerEndTime={timerEndTime}
+                                            setTimerEndTime={setTimerEndTime}
+                                            generalSettings={generalSettings}
+                                            soundSettings={soundSettings}
+                                            playAlarm={playAlarm}
+                                            setPlayAlarm={setPlayAlarm}
+                                            alarmIntervalId={alarmIntervalId}
+                                            setAlarmIntervalId={
+                                                setAlarmIntervalId
+                                            }
+                                            alarmRingCount={alarmRingCount}
+                                            setAlarmRingCount={
+                                                setAlarmRingCount
+                                            }
+                                        />
                                     </Route>
                                 </Switch>
                             </div>
