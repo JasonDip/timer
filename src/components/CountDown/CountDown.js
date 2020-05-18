@@ -59,12 +59,13 @@ const CountDown = (props) => {
 
         let time = "";
         if (hours > 0) {
-            time = time.concat(hours.toString().padStart(2, "0"), ":");
+            time = time.concat(hours.toString().padStart(2, "0"), "h ");
         }
         time = time.concat(
             minutes.toString().padStart(2, "0"),
-            ":",
-            seconds.toString().padStart(2, "0")
+            "m ",
+            seconds.toString().padStart(2, "0"),
+            "s"
         );
 
         return time;

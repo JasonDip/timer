@@ -38,6 +38,7 @@ const TimerList = (props) => {
 
     return (
         <div className={styles.containerRight}>
+            <h3>Select a Timer</h3>
             <List
                 className={styles.timerList}
                 itemLayout="horizontal"
