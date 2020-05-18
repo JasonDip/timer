@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
-import styles from "./CountDown.module.css";
 import moment from "moment";
 import { Howl, Howler } from "howler";
-import { getEndTime, formatMilliseconds } from "../util";
-
-import MediaButton, { BUTTON_TYPE } from "./MediaButton/MediaButton";
 import { Button, message, Modal, Result } from "antd";
 import { DoubleRightOutlined, LikeOutlined } from "@ant-design/icons";
 
+import MediaButton, { BUTTON_TYPE } from "./MediaButton/MediaButton";
 import { CLOCK_STATE, SHOW_IN_TITLE } from "../constants";
+import { getEndTime, formatMilliseconds } from "../util";
+import styles from "./CountDown.module.css";
 
 const CountDown = (props) => {
     const [showStopModal, setShowStopModal] = useState(false);

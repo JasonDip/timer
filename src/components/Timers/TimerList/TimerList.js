@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import moment from "moment";
-import { getEndTime, formatMilliseconds } from "../../util";
-
-import { withRouter } from "react-router-dom";
 import { List, Avatar, Modal, Button } from "antd";
-import { CLOCK_STATE } from "../../constants";
+import { withRouter } from "react-router-dom";
 
+import { getEndTime, formatMilliseconds } from "../../util";
+import { CLOCK_STATE } from "../../constants";
 import styles from "./TimerList.module.css";
 
 const TimerList = (props) => {

@@ -1,8 +1,7 @@
 import React from "react";
-import styles from "./NavBar.module.css";
-
 import { Layout, Menu } from "antd";
 import { NavLink, withRouter } from "react-router-dom";
+import styles from "./NavBar.module.css";
 
 const { Header } = Layout;
 

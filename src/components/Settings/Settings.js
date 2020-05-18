@@ -1,5 +1,8 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
+import { Howl, Howler } from "howler";
+import { SoundOutlined } from "@ant-design/icons";
+
 import styles from "./Settings.module.css";
 import { SOUNDS, SHOW_IN_TITLE } from "../constants";
 import {
@@ -7,8 +10,6 @@ import {
     defaultSoundSettings,
     defaultTimerList,
 } from "../defaults";
-import { SoundOutlined } from "@ant-design/icons";
-import { Howl, Howler } from "howler";
 
 import { Divider, Select, InputNumber, Switch, Slider, Button } from "antd";
 const { Option } = Select;
