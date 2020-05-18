@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import styles from "./CountDown.module.css";
 import moment from "moment";
-import { getEndTime } from "../util";
+import { getEndTime, formatMilliseconds } from "../util";
 
 import MediaButton, { BUTTON_TYPE } from "./MediaButton/MediaButton";
 import { Button, message, Modal, Result } from "antd";
@@ -50,25 +50,6 @@ const CountDown = (props) => {
         message.config({ top: 150, duration: 1.5 });
         message.info("Timer Reset");
         setShowResetModal(false);
-    }
-
-    function formatMilliseconds(milliseconds) {
-        let hours = Math.floor(milliseconds / (1000 * 60 * 60));
-        let minutes = Math.floor(milliseconds / (1000 * 60)) - hours * 60;
-        let seconds = milliseconds / 1000 - hours * 60 * 60 - minutes * 60;
-
-        let time = "";
-        if (hours > 0) {
-            time = time.concat(hours.toString().padStart(2, "0"), "h ");
-        }
-        time = time.concat(
-            minutes.toString().padStart(2, "0"),
-            "m ",
-            seconds.toString().padStart(2, "0"),
-            "s"
-        );
-
-        return time;
     }
 
     /*  determine what buttons are displayed based on the clock's state  */

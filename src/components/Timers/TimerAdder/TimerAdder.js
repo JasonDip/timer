@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { Button, Input, Form } from "antd";
+import { Button, Input } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
+import { v4 as uuid } from "uuid";
 
 import styles from "./TimerAdder.module.css";
 
@@ -10,6 +11,7 @@ const TimerAdder = (props) => {
         hours: "",
         minutes: "",
         seconds: "",
+        uuid: "",
     };
 
     const [newTimer, setNewTimer] = useState({ ...defaultTimer });
@@ -39,7 +41,7 @@ const TimerAdder = (props) => {
         }
         props.setTimerList((timerList) => [
             ...timerList,
-            { title: newTimer.title, duration: duration },
+            { title: newTimer.title, duration: duration, uuid: uuid() },
         ]);
         setNewTimer({ ...defaultTimer });
         setInvalidDuration(false);

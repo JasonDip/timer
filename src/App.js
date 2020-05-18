@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-
+import { v4 as uuid } from "uuid";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import { Layout } from "antd";
@@ -34,18 +34,23 @@ function App(props) {
                 {
                     title: "Working",
                     duration: 1500000,
+                    uuid: uuid(),
                 },
                 {
                     title: "Short Break",
                     duration: 300000,
+                    uuid: uuid(),
                 },
                 {
                     title: "test",
                     duration: 1000,
+                    uuid: uuid(),
                 },
             ]);
         }
     }, []);
+
+    // TODO: add useeffect for saving timerlist to localstorage when changed
 
     return (
         <BrowserRouter>
