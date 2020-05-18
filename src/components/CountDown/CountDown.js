@@ -118,9 +118,7 @@ const CountDown = (props) => {
     } = props;
     useEffect(() => {
         if (clockState === CLOCK_STATE.RUNNING && !intervalId) {
-            console.log("creating interval");
             let interval = setInterval(() => {
-                console.log("running interval");
                 setActiveTimer((state) => {
                     // switch back to main page if time is up
                     if (state.duration <= 0) {
@@ -144,7 +142,6 @@ const CountDown = (props) => {
             }, 1000);
             setIntervalId(interval);
         } else if (clockState !== CLOCK_STATE.RUNNING && intervalId) {
-            console.log("cancel interval");
             if (intervalId) {
                 clearTimeout(intervalId);
                 setIntervalId(null);
@@ -187,7 +184,6 @@ const CountDown = (props) => {
         if (!soundSettings.soundEnabled) return;
 
         if (playAlarm && !alarmIntervalId) {
-            console.log("inside setup interval for sound");
             // setup the new Howl
             const sound = new Howl({
                 src: [`/alarmsounds/${soundSettings.soundClip}.mp3`],
@@ -213,7 +209,6 @@ const CountDown = (props) => {
     /*  play alarm rang for the amount specified in options  */
     useEffect(() => {
         if (alarmRingCount <= 0) {
-            console.log("in cancel");
             clearInterval(alarmIntervalId);
             setAlarmIntervalId(null);
             setPlayAlarm(false);

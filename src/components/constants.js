@@ -10,3 +10,13 @@ export const SHOW_IN_TITLE = {
     COUNTDOWN: "Countdown",
     STOPWATCH: "Stopwatch",
 };
+
+export const SOUNDS = {
+    BELL: "bell",
+    DING: "ding",
+    FASTTIPTOES: "fasttiptoes",
+    QUACK: "quack",
+    RUBBERDUCK: "rubberduck",
+    SIMPLEBELL: "simplebell",
+    SWISSBELL: "swissbell",
+};

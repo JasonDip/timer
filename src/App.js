@@ -107,7 +107,14 @@ function App(props) {
                                     </Route>
 
                                     <Route path="/settings">
-                                        <Settings />
+                                        <Settings
+                                            generalSettings={generalSettings}
+                                            setGeneralSettings={
+                                                setGeneralSettings
+                                            }
+                                            soundSettings={soundSettings}
+                                            setSoundSettings={setSoundSettings}
+                                        />
                                     </Route>
 
                                     <Route path="/about">

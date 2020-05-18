@@ -19,13 +19,13 @@ export const defaultTimerList = [
     },
 ];
 
+export const defaultGeneralSettings = {
+    showInTitle: SHOW_IN_TITLE.COUNTDOWN,
+};
+
 export const defaultSoundSettings = {
     soundEnabled: true,
     soundClip: "ding",
     volume: 0.3,
     ringCount: 3,
-};
-
-export const defaultGeneralSettings = {
-    showInTitle: SHOW_IN_TITLE.COUNTDOWN,
 };
