@@ -1,10 +1,10 @@
 import React from "react";
 import moment from "moment";
-import { getEndTime } from "../util";
+import { getEndTime } from "../../util";
 
 import { withRouter } from "react-router-dom";
 import { List, Avatar } from "antd";
-import { CLOCK_STATE } from "../CountDown/CountDown";
+import { CLOCK_STATE } from "../../CountDown/CountDown";
 
 import styles from "./TimerList.module.css";
 

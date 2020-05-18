@@ -1,7 +1,7 @@
 .containerRight {
     height: auto;
     flex-grow: 1;
-    /* background-color: purple; */
+    padding-left: 10px;
 }
 
 .timerList {

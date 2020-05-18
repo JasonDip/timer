@@ -1,0 +1,6 @@
+.timerContainer {
+    padding: 50px;
+    display: flex;
+    overflow: auto;
+    width: 100%;
+}

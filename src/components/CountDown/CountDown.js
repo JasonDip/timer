@@ -170,12 +170,10 @@ const CountDown = (props) => {
                 </React.Fragment>
             ) : null}
             {props.clockState === CLOCK_STATE.FINISHED ? (
-                <p>
-                    <Result
-                        icon={<LikeOutlined />}
-                        title={`${props.selectedTimer.title} ended at ${props.timerEndTime}!`}
-                    />
-                </p>
+                <Result
+                    icon={<LikeOutlined />}
+                    title={`${props.selectedTimer.title} ended at ${props.timerEndTime}!`}
+                />
             ) : null}
             {buttons}
             <Modal

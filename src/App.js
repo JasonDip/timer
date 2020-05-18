@@ -8,10 +8,11 @@ import "./App.css";
 
 import CountDown, { CLOCK_STATE } from "./components/CountDown/CountDown";
 import NavBar from "./components/NavBar/NavBar";
-import TimerAdder from "./components/TimerAdder/TimerAdder";
-import TimerList from "./components/TimerList/TimerList";
+// import TimerAdder from "./components/TimerAdder/TimerAdder";
+// import TimerList from "./components/TimerList/TimerList";
 import Settings from "./components/Settings/Settings";
 import About from "./components/About/About";
+import Timers from "./components/Timers/Timers";
 
 function App(props) {
     const [timerList, setTimerList] = useState(null);
@@ -71,10 +72,7 @@ function App(props) {
                                     </Route>
 
                                     <Route path="/timers">
-                                        <TimerAdder
-                                            setTimerList={setTimerList}
-                                        />
-                                        <TimerList
+                                        <Timers
                                             timerList={timerList}
                                             setTimerList={setTimerList}
                                             setSelectedTimer={setSelectedTimer}
