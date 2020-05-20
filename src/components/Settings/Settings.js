@@ -47,6 +47,9 @@ const Settings = (props) => {
     };
 
     const ringCountChangeHandler = (value) => {
+        if (value <= 0) {
+            value = 1;
+        }
         props.setSoundSettings((state) => ({
             ...state,
             ringCount: value,
@@ -54,6 +57,9 @@ const Settings = (props) => {
     };
 
     const timeBetweenRingsChangeHandler = (value) => {
+        if (value <= 0) {
+            value = 1;
+        }
         props.setSoundSettings((state) => ({
             ...state,
             timeBetweenRings: value,
