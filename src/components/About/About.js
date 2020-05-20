@@ -62,7 +62,7 @@ const About = (props) => {
                 <Tooltip placement="top" title={"GitHub"}>
                     <a
                         target="_blank"
-                        href="https://github.com/JasonDip"
+                        href="https://github.com/JasonDip/timer"
                         rel="noopener noreferrer"
                         className={styles.contactIcon}
                     >
