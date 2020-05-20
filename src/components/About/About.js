@@ -10,13 +10,14 @@ const About = (props) => {
             <h3>Timer</h3>
             <p>
                 Timer is a time keeping app for boosting productivity and focus.
+                There are two types of clocks: countdown timer and stopwatch.
                 The default timers are based on the Pomodoro Technique, but
                 custom timers can be set as well.
             </p>
             <h3>Pomodoro Technique</h3>
             <p>
                 The Pomodoro Technique is a time management system which breaks
-                down work into intervals. The steps are as follows:
+                down work into intervals. The steps to apply the technique are:
                 <ol>
                     <li>
                         Plan the work that needs to be done. It is recommended
@@ -31,9 +32,9 @@ const About = (props) => {
                         minutes).
                     </li>
                     <li>
-                        Repeat until you have done 4 work intervals. Instead of
-                        taking a short break, take a longer one (about 20
-                        minutes).
+                        Repeat until you have done 4 work intervals. Then
+                        instead of taking a short break, take a longer one
+                        (about 20 minutes).
                     </li>
                 </ol>
                 More information can be found
