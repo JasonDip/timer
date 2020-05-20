@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import styles from "./Stopwatch.module.css";
-import { BUTTON_TYPE, STOPWATCH_STATE, SHOW_IN_TITLE } from "../constants";
+import { BUTTON_TYPE, STOPWATCH_STATE } from "../constants";
 import MediaButton from "../MediaButton/MediaButton";
 import { formatMilliseconds } from "../util";
 

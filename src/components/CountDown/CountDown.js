@@ -6,7 +6,7 @@ import { Button, message, Modal, Result } from "antd";
 import { DoubleRightOutlined, LikeOutlined } from "@ant-design/icons";
 
 import MediaButton from "../MediaButton/MediaButton";
-import { CLOCK_STATE, SHOW_IN_TITLE, BUTTON_TYPE } from "../constants";
+import { CLOCK_STATE, BUTTON_TYPE } from "../constants";
 import { getEndTime, formatMilliseconds } from "../util";
 import styles from "./CountDown.module.css";
 
@@ -193,7 +193,7 @@ const CountDown = (props) => {
                         return count - 1;
                     });
                 }
-            }, 1000);
+            }, soundSettings.timeBetweenRings);
             setAlarmIntervalId(intervalId);
         }
     }, [

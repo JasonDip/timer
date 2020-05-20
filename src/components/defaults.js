@@ -28,4 +28,5 @@ export const defaultSoundSettings = {
     soundClip: "ding",
     volume: 0.3,
     ringCount: 3,
+    timeBetweenRings: 500,
 };

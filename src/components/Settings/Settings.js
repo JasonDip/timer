@@ -53,6 +53,13 @@ const Settings = (props) => {
         }));
     };
 
+    const timeBetweenRingsChangeHandler = (value) => {
+        props.setSoundSettings((state) => ({
+            ...state,
+            timeBetweenRings: value,
+        }));
+    };
+
     const testSoundClickHandler = () => {
         const sound = new Howl({
             src: [`/alarmsounds/${props.soundSettings.soundClip}.mp3`],
@@ -101,9 +108,9 @@ const Settings = (props) => {
                     <Option value={val}>{val}</Option>
                 ))}
             </Select>
-            <br />
 
             <Divider />
+
             <div style={{ display: "flex" }}>
                 <h3 style={{ marginRight: "10px" }}>Sound Settings</h3>
                 <Button
@@ -117,6 +124,7 @@ const Settings = (props) => {
             <Switch
                 defaultChecked={soundEnableVal()}
                 onChange={soundEnabledChangeHandler}
+                style={{ minHeight: "22px", maxWidth: "25%" }}
             />
             <br />
 
@@ -169,8 +177,23 @@ const Settings = (props) => {
             />
             <br />
 
+            <label>Time Between Rings (ms)</label>
+            <InputNumber
+                defaultValue={
+                    (props.soundSettings &&
+                        props.soundSettings.timeBetweenRings) ||
+                    defaultSoundSettings.timeBetweenRings
+                }
+                disabled={
+                    !(
+                        props.soundSettings && props.soundSettings.soundEnabled
+                    ) || !defaultSoundSettings.soundEnabled
+                }
+                onChange={timeBetweenRingsChangeHandler}
+            />
+            <br />
+
             <Divider />
-            {/* TODO show a modal before resetting */}
             <Button type="danger" onClick={resetToDefaultClickHandler}>
                 Reset To Default
             </Button>
