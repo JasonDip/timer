@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
 import { Howl, Howler } from "howler";
+import { Modal } from "antd";
 import { SoundOutlined } from "@ant-design/icons";
 
 import styles from "./Settings.module.css";
@@ -15,6 +16,8 @@ import { Divider, Select, InputNumber, Switch, Slider, Button } from "antd";
 const { Option } = Select;
 
 const Settings = (props) => {
+    const [showResetSettingsModal, setShowResetSettingsModal] = useState(false);
+
     const showInTitleChangeHandler = (value) => {
         props.setGeneralSettings((state) => ({
             ...state,
@@ -51,17 +54,19 @@ const Settings = (props) => {
     };
 
     const testSoundClickHandler = () => {
-        // setup the new Howl
         const sound = new Howl({
             src: [`/alarmsounds/${props.soundSettings.soundClip}.mp3`],
         });
-        // change global volume
         Howler.volume(props.soundSettings.volume);
-        // play the sound
         sound.play();
     };
 
     const resetToDefaultClickHandler = () => {
+        setShowResetSettingsModal(true);
+    };
+
+    const confirmedSettingsReset = () => {
+        setShowResetSettingsModal(false);
         props.setSoundSettings({ ...defaultSoundSettings });
         props.setGeneralSettings({ ...defaultGeneralSettings });
         props.setTimerList(JSON.parse(JSON.stringify(defaultTimerList)));
@@ -165,9 +170,20 @@ const Settings = (props) => {
             <br />
 
             <Divider />
+            {/* TODO show a modal before resetting */}
             <Button type="danger" onClick={resetToDefaultClickHandler}>
-                Reset To Default Settings
+                Reset To Default
             </Button>
+            <Modal
+                centered
+                title="Reset to Default"
+                visible={showResetSettingsModal}
+                okText="Yes"
+                onOk={confirmedSettingsReset}
+                onCancel={() => setShowResetSettingsModal(false)}
+            >
+                Are you sure you want to reset all settings and timers?
+            </Modal>
         </div>
     );
 };

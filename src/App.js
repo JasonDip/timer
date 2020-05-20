@@ -9,6 +9,7 @@ import NavBar from "./components/NavBar/NavBar";
 import Settings from "./components/Settings/Settings";
 import About from "./components/About/About";
 import Timers from "./components/Timers/Timers";
+import Stopwatch from "./components/Stopwatch/Stopwatch";
 import {
     defaultTimerList,
     defaultSoundSettings,
@@ -117,6 +118,10 @@ function App(props) {
                                             intervalId={intervalId}
                                             setIntervalId={setIntervalId}
                                         />
+                                    </Route>
+
+                                    <Route path="/stopwatch">
+                                        <Stopwatch />
                                     </Route>
 
                                     <Route path="/settings">
