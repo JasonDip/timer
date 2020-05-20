@@ -15,7 +15,12 @@ import {
     defaultSoundSettings,
     defaultGeneralSettings,
 } from "./components/defaults";
-import { CLOCK_STATE } from "./components/constants";
+import {
+    CLOCK_STATE,
+    STOPWATCH_STATE,
+    SHOW_IN_TITLE,
+} from "./components/constants";
+import { formatMilliseconds } from "./components/util";
 
 function App(props) {
     /*  state for countdown timer  */
@@ -30,6 +35,13 @@ function App(props) {
     const [playAlarm, setPlayAlarm] = useState(false);
     const [alarmIntervalId, setAlarmIntervalId] = useState(null); // intervalId for the alarm sound repeating
     const [alarmRingCount, setAlarmRingCount] = useState(null);
+
+    /*  state for stopwatch  */
+    const [stopwatchState, setStopwatchState] = useState(
+        STOPWATCH_STATE.PAUSED
+    );
+    const [stopwatchTime, setStopwatchTime] = useState(0);
+    const [stopwatchInterval, setStopwatchInterval] = useState(null);
 
     /*  state for settings  */
     const [generalSettings, setGeneralSettings] = useState(null);
@@ -98,6 +110,41 @@ function App(props) {
         }
     }, [alarmRingCount, alarmIntervalId]);
 
+    /*  show countdown or stopwatch in title  */
+    useEffect(() => {
+        // show countdown in title
+        if (
+            generalSettings &&
+            generalSettings.showInTitle === SHOW_IN_TITLE.COUNTDOWN &&
+            (clockState === CLOCK_STATE.RUNNING ||
+                clockState === CLOCK_STATE.FINISHED)
+        ) {
+            if (activeTimer) {
+                document.title = formatMilliseconds(activeTimer.duration);
+            } else {
+                document.title = "!! Time Up !!";
+            }
+        }
+        // show stopwatch in title
+        else if (
+            generalSettings &&
+            generalSettings.showInTitle === SHOW_IN_TITLE.STOPWATCH &&
+            stopwatchState === STOPWATCH_STATE.RUNNING
+        ) {
+            document.title = formatMilliseconds(stopwatchTime);
+        }
+        // show normal title
+        else {
+            document.title = "Timer";
+        }
+    }, [
+        generalSettings,
+        activeTimer,
+        clockState,
+        stopwatchState,
+        stopwatchTime,
+    ]);
+
     return (
         <BrowserRouter>
             <div className="App">
@@ -121,7 +168,21 @@ function App(props) {
                                     </Route>
 
                                     <Route path="/stopwatch">
-                                        <Stopwatch />
+                                        <Stopwatch
+                                            stopwatchState={stopwatchState}
+                                            setStopwatchState={
+                                                setStopwatchState
+                                            }
+                                            stopwatchTime={stopwatchTime}
+                                            setStopwatchTime={setStopwatchTime}
+                                            stopwatchInterval={
+                                                stopwatchInterval
+                                            }
+                                            setStopwatchInterval={
+                                                setStopwatchInterval
+                                            }
+                                            generalSettings={generalSettings}
+                                        />
                                     </Route>
 
                                     <Route path="/settings">

@@ -1,0 +1,30 @@
+h1 {
+    font-size: 4em;
+}
+
+h2 {
+    font-size: 8em;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.mediaBox {
+    display: flex;
+    flex-direction: row;
+}
+
+@media screen and (max-width: 750px) {
+    h1 {
+        font-size: 3em;
+    }
+
+    h2 {
+        font-size: 5em;
+    }
+}

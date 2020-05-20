@@ -5,8 +5,8 @@ import { Howl, Howler } from "howler";
 import { Button, message, Modal, Result } from "antd";
 import { DoubleRightOutlined, LikeOutlined } from "@ant-design/icons";
 
-import MediaButton, { BUTTON_TYPE } from "./MediaButton/MediaButton";
-import { CLOCK_STATE, SHOW_IN_TITLE } from "../constants";
+import MediaButton from "../MediaButton/MediaButton";
+import { CLOCK_STATE, SHOW_IN_TITLE, BUTTON_TYPE } from "../constants";
 import { getEndTime, formatMilliseconds } from "../util";
 import styles from "./CountDown.module.css";
 
@@ -119,15 +119,6 @@ const CountDown = (props) => {
                     // switch back to main page if time is up
                     if (state.duration <= 0) {
                         history.push("/");
-                    }
-
-                    // show countdown in title based on settings
-                    if (
-                        generalSettings.showInTitle === SHOW_IN_TITLE.COUNTDOWN
-                    ) {
-                        document.title = formatMilliseconds(
-                            state.duration - 1000
-                        );
                     }
 
                     return {

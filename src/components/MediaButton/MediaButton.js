@@ -8,13 +8,7 @@ import {
     LeftCircleFilled,
 } from "@ant-design/icons";
 import styles from "./MediaButton.module.css";
-
-export const BUTTON_TYPE = {
-    PAUSE: "Pause",
-    PLAY: "Play",
-    STOP: "Stop",
-    RESET: "Reset",
-};
+import { BUTTON_TYPE } from "../constants";
 
 const MediaButton = (props) => {
     const getIcon = (buttonType) => {

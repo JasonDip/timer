@@ -17,11 +17,6 @@ export const defaultTimerList = [
         duration: 1200000,
         uuid: uuid(),
     },
-    {
-        title: "test",
-        duration: 1000,
-        uuid: uuid(),
-    },
 ];
 
 export const defaultGeneralSettings = {
