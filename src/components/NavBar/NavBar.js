@@ -22,6 +22,10 @@ const NavBar = (props) => {
                     <NavLink to="/timers">Timers</NavLink>
                 </Menu.Item>
 
+                <Menu.Item className="unselectable" key="/history">
+                    <NavLink to="/history">History</NavLink>
+                </Menu.Item>
+
                 <Menu.Item className="unselectable" key="/stopwatch">
                     <NavLink to="/stopwatch">Stopwatch</NavLink>
                 </Menu.Item>

@@ -4,12 +4,13 @@ import { Layout } from "antd";
 import "antd/dist/antd.css";
 import "./App.css";
 
-import CountDown from "./components/CountDown/CountDown";
 import NavBar from "./components/NavBar/NavBar";
+import CountDown from "./components/CountDown/CountDown";
+import Timers from "./components/Timers/Timers";
+import History from "./components/History/History";
+import Stopwatch from "./components/Stopwatch/Stopwatch";
 import Settings from "./components/Settings/Settings";
 import About from "./components/About/About";
-import Timers from "./components/Timers/Timers";
-import Stopwatch from "./components/Stopwatch/Stopwatch";
 import {
     defaultTimerList,
     defaultSoundSettings,
@@ -165,6 +166,10 @@ function App(props) {
                                             intervalId={intervalId}
                                             setIntervalId={setIntervalId}
                                         />
+                                    </Route>
+
+                                    <Route path="/history">
+                                        <History />
                                     </Route>
 
                                     <Route path="/stopwatch">
