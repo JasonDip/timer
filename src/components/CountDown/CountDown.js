@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import moment from "moment";
 import { Howl, Howler } from "howler";
-import { Button, message, Modal, Result } from "antd";
+import { Button, Modal, Result } from "antd";
 import { DoubleRightOutlined, CheckCircleOutlined } from "@ant-design/icons";
 
 import MediaButton from "../MediaButton/MediaButton";
@@ -19,8 +19,6 @@ const CountDown = (props) => {
     }
 
     function confirmStopHandler() {
-        message.config({ top: 150, duration: 1.5 });
-        message.info("Timer Stopped");
         props.setClockState(CLOCK_STATE.STOPPED);
         props.setActiveTimer(null);
         setShowStopModal(false);
@@ -51,8 +49,6 @@ const CountDown = (props) => {
     function confirmResetHandler() {
         props.setActiveTimer(props.selectedTimer);
         props.setClockState(CLOCK_STATE.PAUSED);
-        message.config({ top: 150, duration: 1.5 });
-        message.info("Timer Reset");
         setShowResetModal(false);
     }
 
