@@ -4,4 +4,6 @@
     flex-direction: column;
     overflow: auto;
     width: 100%;
+    text-align: center;
+    align-items: center;
 }

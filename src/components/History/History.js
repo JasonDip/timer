@@ -1,5 +1,5 @@
 import React from "react";
-import { Timeline } from "antd";
+import { Timeline, Button } from "antd";
 import {
     CheckCircleOutlined,
     PlayCircleOutlined,
@@ -51,7 +51,7 @@ const History = (props) => {
     ) {
         activeItem = (
             <Timeline.Item
-                label={props.activeTimer.time}
+                label={props.activeTimer.time || " "}
                 color="grey"
                 dot={<ClockCircleOutlined />}
             >
@@ -64,12 +64,28 @@ const History = (props) => {
         activeItem = null;
     }
 
+    let clearClickHandler = () => {
+        props.setTimerHistory([]);
+    };
+
     return (
         <div className={styles.container}>
-            <h3 style={{ textAlign: "center", paddingBottom: "20px" }}>
-                Timer History
-            </h3>
-            <Timeline reverse mode="left">
+            <h3 style={{ textAlign: "center" }}>Timer History</h3>
+            <Button
+                danger
+                style={{
+                    textAlign: "center",
+                    width: "auto",
+                }}
+                onClick={clearClickHandler}
+            >
+                Clear
+            </Button>
+            <Timeline
+                style={{ paddingTop: "20px", width: "100%" }}
+                reverse
+                mode="left"
+            >
                 {items}
                 {activeItem}
             </Timeline>

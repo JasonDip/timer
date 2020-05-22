@@ -175,6 +175,7 @@ function App(props) {
                                     <Route path="/history">
                                         <History
                                             timerHistory={timerHistory}
+                                            setTimerHistory={setTimerHistory}
                                             clockState={clockState}
                                             activeTimer={activeTimer}
                                         />
