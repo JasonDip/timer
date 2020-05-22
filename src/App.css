@@ -9,8 +9,9 @@ html {
 .App {
     width: 100vw;
     height: 100vh;
-    min-width: 450px;
-    min-height: 600px;
+    min-width: 640px;
+    min-height: 480px;
+    overflow: hidden;
 }
 
 .layout {

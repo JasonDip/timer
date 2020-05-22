@@ -19,12 +19,12 @@ h2 {
     flex-direction: row;
 }
 
-@media screen and (max-width: 750px) {
+@media (max-width: 750px), (max-height: 750px) {
     h1 {
-        font-size: 3em;
+        font-size: 3em !important;
     }
 
     h2 {
-        font-size: 5em;
+        font-size: 5em !important;
     }
 }
