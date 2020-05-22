@@ -9,6 +9,8 @@ Live demo: https://www.timer.jasondip.com/
 -   React
 -   Ant Design
 
+# Preview
+
 <img src="demo.gif" width="500px" alt="Timer Demo Gif" title="Timer Demo Gif"/>
 
 # Features
