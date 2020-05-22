@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import moment from "moment";
 import { List, Avatar, Modal, Button } from "antd";
-import { DeleteOutlined, ClockCircleOutlined } from "@ant-design/icons";
+import { DeleteOutlined, PlayCircleOutlined } from "@ant-design/icons";
 import { withRouter } from "react-router-dom";
 
 import { getEndTime, formatMilliseconds } from "../../util";
@@ -99,7 +99,7 @@ const TimerList = (props) => {
                                         backgroundColor: "transparent",
                                         color: "#1890ff",
                                     }}
-                                    icon={<ClockCircleOutlined />}
+                                    icon={<PlayCircleOutlined />}
                                 />
                             }
                             title={item.title}

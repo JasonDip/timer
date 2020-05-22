@@ -35,22 +35,6 @@ html {
     max-width: 800px;
 }
 
-/* need to manually fix styles from antd */
-.ant-timeline-item-head {
-    background-color: transparent !important;
-}
-.ant-list-item-meta-avatar {
-    margin-right: 0px !important;
-}
-.ant-timeline-item-tail {
-    border-left: 2px solid #001529;
-    /* d1d1d1 */
-    /* 001529 */
-    /* 1890ff */
-    top: 16px;
-    height: calc(100% - 20px);
-}
-
 .container {
     display: flex;
     justify-content: space-evenly;
@@ -64,4 +48,27 @@ html {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+}
+
+/* need to manually fix styles from antd */
+.ant-timeline-item-head {
+    background-color: transparent !important;
+}
+.ant-list-item-meta-avatar {
+    margin-right: 0px !important;
+}
+.ant-timeline-item-tail {
+    border-left: 2px solid #001529;
+    /* d1d1d1 */
+    /* 001529 */
+    /* 1890ff */
+    top: 20px;
+    height: calc(100% - 26px);
+}
+.ant-timeline-item-head svg {
+    width: 2em;
+    height: 2em;
+}
+.ant-timeline-item-label {
+    padding-right: 10px !important;
 }

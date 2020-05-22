@@ -3,7 +3,7 @@ import { withRouter } from "react-router-dom";
 import moment from "moment";
 import { Howl, Howler } from "howler";
 import { Button, message, Modal, Result } from "antd";
-import { DoubleRightOutlined, LikeOutlined } from "@ant-design/icons";
+import { DoubleRightOutlined, CheckCircleOutlined } from "@ant-design/icons";
 
 import MediaButton from "../MediaButton/MediaButton";
 import { CLOCK_STATE, BUTTON_TYPE, HISTORY_STATE } from "../constants";
@@ -237,7 +237,7 @@ const CountDown = (props) => {
             ) : null}
             {props.clockState === CLOCK_STATE.FINISHED ? (
                 <Result
-                    icon={<LikeOutlined />}
+                    icon={<CheckCircleOutlined style={{ color: "#52c41a" }} />}
                     title={`${props.selectedTimer.title} ended at ${props.timerEndTime}!`}
                 />
             ) : null}

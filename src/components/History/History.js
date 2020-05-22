@@ -19,11 +19,11 @@ const History = (props) => {
         let icon;
         switch (history.state) {
             case HISTORY_STATE.START:
-                color = "green";
+                color = "blue";
                 icon = <PlayCircleOutlined />;
                 break;
             case HISTORY_STATE.FINISH:
-                color = "blue";
+                color = "green";
                 icon = <CheckCircleOutlined />;
                 break;
             case HISTORY_STATE.STOP:

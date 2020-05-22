@@ -37,13 +37,13 @@ const About = (props) => {
                         (about 20 minutes).
                     </li>
                 </ol>
-                More information can be found
+                More information on this technique can be found on its
                 <a
                     target="_blank"
                     href="https://en.wikipedia.org/wiki/Pomodoro_Technique"
                     rel="noopener noreferrer"
                 >
-                    <span> here</span>
+                    <span> Wiki</span>
                 </a>
                 .
             </p>
