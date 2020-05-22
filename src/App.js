@@ -208,6 +208,9 @@ function App(props) {
                                             setSoundSettings={setSoundSettings}
                                             setTimerList={setTimerList}
                                             setTimerHistory={setTimerHistory}
+                                            setClockState={setClockState}
+                                            setSelectedTimer={setSelectedTimer}
+                                            setActiveTimer={setActiveTimer}
                                         />
                                     </Route>
 

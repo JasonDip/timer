@@ -5,7 +5,7 @@ import { Modal } from "antd";
 import { SoundOutlined } from "@ant-design/icons";
 
 import styles from "./Settings.module.css";
-import { SOUNDS, SHOW_IN_TITLE } from "../constants";
+import { SOUNDS, SHOW_IN_TITLE, CLOCK_STATE } from "../constants";
 import {
     defaultGeneralSettings,
     defaultSoundSettings,
@@ -84,6 +84,9 @@ const Settings = (props) => {
         props.setGeneralSettings({ ...defaultGeneralSettings });
         props.setTimerList(JSON.parse(JSON.stringify(defaultTimerList)));
         props.setTimerHistory([]);
+        props.setClockState(CLOCK_STATE.STOPPED);
+        props.setSelectedTimer(null);
+        props.setActiveTimer(null);
         document.title = "Timer";
         props.history.push("/");
     };
