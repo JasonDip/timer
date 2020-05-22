@@ -21,7 +21,7 @@ Live demo: https://www.timer.jasondip.com/
 
 # Countdown Timer
 
-Select a timer in the Timer page to begin counting down. Custom timers can be created and are saved between session in local storage.
+Select a timer in the Timer page to begin counting down. Custom timers can be created and are saved between sessions in the browser's local storage.
 
 The Countdown page has a view for the active timer, but does not need to be in focus to countdown.
 
