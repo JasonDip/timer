@@ -16,7 +16,7 @@ const TimerList = (props) => {
     const timerClickHandler = (e) => {
         // bubble up to the menu-item-div that is holding the timer object
         let target = e.target;
-        let tryCount = 6;
+        let tryCount = 7;
         while (!target.hasAttribute("rowKey")) {
             target = target.parentElement;
             tryCount--;
