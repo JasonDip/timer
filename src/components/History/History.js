@@ -14,7 +14,7 @@ const History = (props) => {
             <h3 style={{ textAlign: "center", paddingBottom: "20px" }}>
                 Timer History
             </h3>
-            <Timeline className={styles.slowAnimation} reverse mode="left">
+            <Timeline reverse mode="left">
                 <Timeline.Item
                     label="MM-DD-YYYY"
                     color="green"
@@ -44,7 +44,7 @@ const History = (props) => {
                     Title (00:00) - Cancel
                 </Timeline.Item>
                 <Timeline.Item
-                    label="MM-DD-YYYY"
+                    // label="MM-DD-YYYY"
                     color="grey"
                     dot={<ClockCircleOutlined />}
                 >

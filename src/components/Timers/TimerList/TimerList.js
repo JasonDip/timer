@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import moment from "moment";
 import { List, Avatar, Modal, Button } from "antd";
+import { DeleteOutlined } from "@ant-design/icons";
 import { withRouter } from "react-router-dom";
 
 import { getEndTime, formatMilliseconds } from "../../util";
@@ -74,9 +75,11 @@ const TimerList = (props) => {
                         className={styles.timerItem}
                         rowKey={JSON.stringify(item)}
                         actions={[
-                            <Button danger onClick={timerDeleteHandler}>
-                                X
-                            </Button>,
+                            <Button
+                                danger
+                                onClick={timerDeleteHandler}
+                                icon={<DeleteOutlined />}
+                            ></Button>,
                         ]}
                     >
                         <List.Item.Meta
