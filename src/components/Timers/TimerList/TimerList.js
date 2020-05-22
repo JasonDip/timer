@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import moment from "moment";
 import { List, Avatar, Modal, Button } from "antd";
-import { DeleteOutlined } from "@ant-design/icons";
+import { DeleteOutlined, ClockCircleOutlined } from "@ant-design/icons";
 import { withRouter } from "react-router-dom";
 
 import { getEndTime, formatMilliseconds } from "../../util";
@@ -16,7 +16,7 @@ const TimerList = (props) => {
     const timerClickHandler = (e) => {
         // bubble up to the menu-item-div that is holding the timer object
         let target = e.target;
-        let tryCount = 5;
+        let tryCount = 6;
         while (!target.hasAttribute("rowKey")) {
             target = target.parentElement;
             tryCount--;
@@ -83,7 +83,16 @@ const TimerList = (props) => {
                         ]}
                     >
                         <List.Item.Meta
-                            avatar={<Avatar src="/clock.jpg" />}
+                            avatar={
+                                <Avatar
+                                    size={50}
+                                    style={{
+                                        backgroundColor: "transparent",
+                                        color: "#1890ff",
+                                    }}
+                                    icon={<ClockCircleOutlined />}
+                                />
+                            }
                             title={item.title}
                             description={formatMilliseconds(item.duration)}
                             onClick={timerClickHandler}
