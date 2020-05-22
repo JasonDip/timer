@@ -11,7 +11,7 @@ Live demo: https://www.timer.jasondip.com/
 
 # Preview
 
-<img src="demo.gif" width="500px" alt="Timer Demo Gif" title="Timer Demo Gif"/>
+<img src="demo.gif" width="600px" alt="Timer Demo Gif" title="Timer Demo Gif"/>
 
 # Features
 
@@ -21,9 +21,9 @@ Live demo: https://www.timer.jasondip.com/
 
 # Countdown Timer
 
-Create timers in a Timer page then select one to begin counting down. The Countdown page has a view for the active timer, but does not need to be in focus to countdown.
+Select a timer in the Timer page to begin counting down. Custom timers can be created and are saved between session in local storage.
 
-Custom timers can be created and are saved between session in local storage.
+The Countdown page has a view for the active timer, but does not need to be in focus to countdown.
 
 The History page keeps a timeline of timers that have started, stopped, or finished.
 
@@ -33,4 +33,4 @@ A simple stopwatch that counts up time.
 
 # Adjustable Settings
 
-The settings page allows you to change general settings and sound settings. The general settings are where you set which timer (countdown or stopwatch) to show in the tab title. The sound settings are where you can adjust the sound that plays when a countdown timer has finished.
+The settings page allows you to change general settings and sound settings. The sound settings are for adjusting the sound that plays when a countdown timer has finished.
