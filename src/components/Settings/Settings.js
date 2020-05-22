@@ -83,6 +83,7 @@ const Settings = (props) => {
         props.setSoundSettings({ ...defaultSoundSettings });
         props.setGeneralSettings({ ...defaultGeneralSettings });
         props.setTimerList(JSON.parse(JSON.stringify(defaultTimerList)));
+        props.setTimerHistory([]);
         document.title = "Timer";
         props.history.push("/");
     };

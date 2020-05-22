@@ -6,50 +6,72 @@ import {
     CloseCircleOutlined,
     ClockCircleOutlined,
 } from "@ant-design/icons";
+
+import { HISTORY_STATE, CLOCK_STATE } from "../constants";
+import { formatMilliseconds } from "../util";
 import styles from "./History.module.css";
 
 const History = (props) => {
+    // need to create all timeline items here due to bug in antd
+    // cannot create Timeline.Item components separately
+    let items = props.timerHistory.map((history) => {
+        let color;
+        let icon;
+        switch (history.state) {
+            case HISTORY_STATE.START:
+                color = "green";
+                icon = <PlayCircleOutlined />;
+                break;
+            case HISTORY_STATE.FINISH:
+                color = "blue";
+                icon = <CheckCircleOutlined />;
+                break;
+            case HISTORY_STATE.STOP:
+                color = "red";
+                icon = <CloseCircleOutlined />;
+                break;
+            default:
+                color = "grey";
+                icon = <ClockCircleOutlined />;
+                break;
+        }
+        return (
+            <Timeline.Item label={history.time} color={color} dot={icon}>
+                {history.title} ({history.duration}){" - "}
+                {history.state}
+            </Timeline.Item>
+        );
+    });
+
+    // add additional item if the timer is currently running/paused
+    let activeItem;
+    if (
+        props.clockState === CLOCK_STATE.RUNNING ||
+        props.clockState === CLOCK_STATE.PAUSED
+    ) {
+        activeItem = (
+            <Timeline.Item
+                label={props.activeTimer.time}
+                color="grey"
+                dot={<ClockCircleOutlined />}
+            >
+                {props.activeTimer.title} (
+                {formatMilliseconds(props.activeTimer.duration)}){" - "}
+                {props.clockState}
+            </Timeline.Item>
+        );
+    } else {
+        activeItem = null;
+    }
+
     return (
         <div className={styles.container}>
             <h3 style={{ textAlign: "center", paddingBottom: "20px" }}>
                 Timer History
             </h3>
             <Timeline reverse mode="left">
-                <Timeline.Item
-                    label="MM-DD-YYYY"
-                    color="green"
-                    dot={<PlayCircleOutlined />}
-                >
-                    Title (00:00) - Start
-                </Timeline.Item>
-                <Timeline.Item
-                    label="MM-DD-YYYY"
-                    color="blue"
-                    dot={<CheckCircleOutlined />}
-                >
-                    Title (00:00) - End
-                </Timeline.Item>
-                <Timeline.Item
-                    label="MM-DD-YYYY"
-                    color="green"
-                    dot={<PlayCircleOutlined />}
-                >
-                    Title (00:00) - Start
-                </Timeline.Item>
-                <Timeline.Item
-                    label="MM-DD-YYYY"
-                    color="red"
-                    dot={<CloseCircleOutlined />}
-                >
-                    Title (00:00) - Cancel
-                </Timeline.Item>
-                <Timeline.Item
-                    // label="MM-DD-YYYY"
-                    color="grey"
-                    dot={<ClockCircleOutlined />}
-                >
-                    Title (00:00) - Running
-                </Timeline.Item>
+                {items}
+                {activeItem}
             </Timeline>
         </div>
     );

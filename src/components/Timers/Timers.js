@@ -16,6 +16,7 @@ const Timers = (props) => {
                 setTimerEndTime={props.setTimerEndTime}
                 intervalId={props.intervalId}
                 setIntervalId={props.setIntervalId}
+                setTimerHistory={props.setTimerHistory}
             />
         </div>
     );

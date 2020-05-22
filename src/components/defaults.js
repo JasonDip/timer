@@ -19,6 +19,13 @@ export const defaultTimerList = [
     },
 ];
 
+export const defaultTimerHistoryItem = {
+    title: "",
+    duration: 0,
+    time: "",
+    state: "",
+};
+
 export const defaultGeneralSettings = {
     showInTitle: SHOW_IN_TITLE.COUNTDOWN,
 };

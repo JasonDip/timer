@@ -5,7 +5,7 @@ import { DeleteOutlined, ClockCircleOutlined } from "@ant-design/icons";
 import { withRouter } from "react-router-dom";
 
 import { getEndTime, formatMilliseconds } from "../../util";
-import { CLOCK_STATE } from "../../constants";
+import { CLOCK_STATE, HISTORY_STATE } from "../../constants";
 import styles from "./TimerList.module.css";
 
 const TimerList = (props) => {
@@ -31,6 +31,15 @@ const TimerList = (props) => {
             clearInterval(props.intervalId);
             props.setIntervalId(null);
         }
+        // add timer to history
+        props.setTimerHistory((timerHistory) => {
+            return timerHistory.concat({
+                title: timer.title,
+                duration: formatMilliseconds(timer.duration),
+                time: getEndTime(moment(), 0),
+                state: HISTORY_STATE.START,
+            });
+        });
         // set state to run timer
         props.setSelectedTimer(timer);
         props.setActiveTimer(timer);

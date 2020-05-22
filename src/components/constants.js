@@ -32,3 +32,11 @@ export const SOUNDS = {
     SIMPLEBELL: "simplebell",
     SWISSBELL: "swissbell",
 };
+
+export const HISTORY_STATE = {
+    START: "Start",
+    FINISH: "Finish",
+    STOP: "Stop",
+    RUNNING: "Running",
+    PAUSED: "Paused",
+};

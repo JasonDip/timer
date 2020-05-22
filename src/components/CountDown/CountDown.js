@@ -6,7 +6,7 @@ import { Button, message, Modal, Result } from "antd";
 import { DoubleRightOutlined, LikeOutlined } from "@ant-design/icons";
 
 import MediaButton from "../MediaButton/MediaButton";
-import { CLOCK_STATE, BUTTON_TYPE } from "../constants";
+import { CLOCK_STATE, BUTTON_TYPE, HISTORY_STATE } from "../constants";
 import { getEndTime, formatMilliseconds } from "../util";
 import styles from "./CountDown.module.css";
 
@@ -25,6 +25,14 @@ const CountDown = (props) => {
         props.setActiveTimer(null);
         setShowStopModal(false);
         document.title = "Timer";
+        props.setTimerHistory((timerHistory) => {
+            return timerHistory.concat({
+                title: props.selectedTimer.title,
+                duration: formatMilliseconds(props.selectedTimer.duration),
+                time: getEndTime(moment(), 0),
+                state: HISTORY_STATE.STOP,
+            });
+        });
     }
 
     function playHandler() {
@@ -152,6 +160,8 @@ const CountDown = (props) => {
         playAlarm,
         setAlarmIntervalId,
         alarmIntervalId,
+        setTimerHistory,
+        selectedTimer,
     } = props;
     useEffect(() => {
         if (activeTimer && activeTimer.duration <= 0) {
@@ -161,8 +171,18 @@ const CountDown = (props) => {
             setActiveTimer(null);
             setPlayAlarm(true);
             setAlarmRingCount(soundSettings.ringCount);
+            setTimerHistory((timerHistory) => {
+                return timerHistory.concat({
+                    title: selectedTimer.title,
+                    duration: formatMilliseconds(selectedTimer.duration),
+                    time: getEndTime(moment(), 0),
+                    state: HISTORY_STATE.FINISH,
+                });
+            });
         }
     }, [
+        selectedTimer,
+        setTimerHistory,
         activeTimer,
         setClockState,
         intervalId,

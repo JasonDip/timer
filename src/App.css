@@ -35,11 +35,20 @@ html {
     max-width: 800px;
 }
 
+/* need to manually fix styles from antd */
 .ant-timeline-item-head {
     background-color: transparent !important;
 }
 .ant-list-item-meta-avatar {
     margin-right: 0px !important;
+}
+.ant-timeline-item-tail {
+    border-left: 2px solid #001529;
+    /* d1d1d1 */
+    /* 001529 */
+    /* 1890ff */
+    top: 16px;
+    height: calc(100% - 20px);
 }
 
 .container {

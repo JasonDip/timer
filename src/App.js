@@ -37,6 +37,9 @@ function App(props) {
     const [alarmIntervalId, setAlarmIntervalId] = useState(null); // intervalId for the alarm sound repeating
     const [alarmRingCount, setAlarmRingCount] = useState(null);
 
+    /*  state for timer history  */
+    const [timerHistory, setTimerHistory] = useState([]);
+
     /*  state for stopwatch  */
     const [stopwatchState, setStopwatchState] = useState(
         STOPWATCH_STATE.PAUSED
@@ -165,11 +168,16 @@ function App(props) {
                                             setTimerEndTime={setTimerEndTime}
                                             intervalId={intervalId}
                                             setIntervalId={setIntervalId}
+                                            setTimerHistory={setTimerHistory}
                                         />
                                     </Route>
 
                                     <Route path="/history">
-                                        <History />
+                                        <History
+                                            timerHistory={timerHistory}
+                                            clockState={clockState}
+                                            activeTimer={activeTimer}
+                                        />
                                     </Route>
 
                                     <Route path="/stopwatch">
@@ -199,6 +207,7 @@ function App(props) {
                                             soundSettings={soundSettings}
                                             setSoundSettings={setSoundSettings}
                                             setTimerList={setTimerList}
+                                            setTimerHistory={setTimerHistory}
                                         />
                                     </Route>
 
@@ -230,6 +239,7 @@ function App(props) {
                                             setAlarmRingCount={
                                                 setAlarmRingCount
                                             }
+                                            setTimerHistory={setTimerHistory}
                                         />
                                     </Route>
                                 </Switch>
