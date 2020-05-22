@@ -38,6 +38,9 @@ html {
 .ant-timeline-item-head {
     background-color: transparent !important;
 }
+.ant-list-item-meta-avatar {
+    margin-right: 0px !important;
+}
 
 .container {
     display: flex;
