@@ -13,7 +13,7 @@ export function getEndTime(time, addDurationMs) {
     ) {
         formatString += "MMM DD, YYYY - ";
     }
-    formatString += "H:mm:ss A";
+    formatString += "h:mm:ss A";
 
     return endTime.format(formatString);
 }
