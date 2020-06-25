@@ -6,8 +6,9 @@ Live demo: https://www.timer.jasondip.com/
 
 # Built With
 
--   React
--   Ant Design
+Frontend: React, Ant Design
+
+Hosting: Netlify
 
 # Preview
 
