@@ -29,11 +29,12 @@ html {
 
 .content {
     height: 100%;
-    -webkit-box-shadow: 0px 0px 25px 5px rgba(0, 0, 0, 0.39);
-    -moz-box-shadow: 0px 0px 25px 5px rgba(0, 0, 0, 0.39);
-    box-shadow: 0px 0px 25px 5px rgba(0, 0, 0, 0.39);
+    -webkit-box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.2);
     /* background: #ececec; */
     max-width: 800px;
+    border-radius: 20px;
 }
 
 .container {
